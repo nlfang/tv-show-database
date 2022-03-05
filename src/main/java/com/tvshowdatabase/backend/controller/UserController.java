@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tvshowdatabase.backend.models.User;
 import com.tvshowdatabase.backend.repository.UserRepository;
-@CrossOrigin(origins = "http://localhost:3001/")
+@CrossOrigin(origins = "http://localhost:3000/")
 @RestController
 public class UserController {
     @Autowired

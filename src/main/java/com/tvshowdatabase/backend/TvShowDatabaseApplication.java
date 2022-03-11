@@ -1,5 +1,7 @@
 package com.tvshowdatabase.backend;
 
+import com.tvshowdatabase.backend.repository.TVShowRepository;
+import com.tvshowdatabase.backend.models.TVShow;
 import com.tvshowdatabase.backend.repository.UserRepository;
 import com.tvshowdatabase.backend.models.User;
 
@@ -9,18 +11,18 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TvShowDatabaseApplication {
+public class TvShowDatabaseApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TvShowDatabaseApplication.class, args);
 	}
 
 	@Autowired
-	private UserRepository userRepository;
-//	@Override
-//	public void run (String... args) throws Exception {
-//		userRepository.save(new User(1, "testUser", "testPassword", "testEmail@gmail.com"));
-//		userRepository.save(new User(2, "testUser2", "testPassword2", "testEmail2@gmail.com"));
-//		userRepository.save(new User(3, "testUser3", "testPassword3", "testEmail3@gmail.com"));
-//	}
+	private TVShowRepository tvShowRepository;
+	@Override
+	public void run (String... args) throws Exception {
+		tvShowRepository.save(new TVShow(1, "Test show 1", 1, 123, 1990, 5, "Director 1"));
+		tvShowRepository.save(new TVShow(2, "Test show 2", 2, 456, 1991, 4, "Director 2"));
+		tvShowRepository.save(new TVShow(3, "Test show 3", 3, 789, 1992, 3, "Director 3"));
+	}
 }

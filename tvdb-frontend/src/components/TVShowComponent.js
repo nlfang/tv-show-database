@@ -43,7 +43,7 @@ class TVShowComponent extends React.Component {
                                         <td>{tvShows.name}</td>
                                         <td>{tvShows.genreID}</td>
                                         <td>{tvShows.length}</td>
-                                        <td>{tvShows.year_of_release}</td>
+                                        <td>{tvShows.yearOfRelease}</td>
                                         <td>{tvShows.rating}</td>
                                         <td>{tvShows.director}</td>
                                 </tr>

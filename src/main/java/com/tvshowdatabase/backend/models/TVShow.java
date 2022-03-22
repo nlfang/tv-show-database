@@ -23,8 +23,8 @@ public class TVShow {
     @Column (name = "name")
     private String name;
 
-    @Column (name = "genreID")
-    private int genreID;
+    //@Column (name = "genreID")
+    //private int genreID;
 
     @Column (name = "length")
     private int length;
@@ -37,4 +37,28 @@ public class TVShow {
 
     @Column (name = "director")
     private String director;
+
+    public int getShowID() {
+        return this.showID;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public int getLength() {
+        return this.length;
+    }
+
+    public int getYearOfRelease() {
+        return this.yearOfRelease;
+    }
+
+    public int getRating() {
+        return this.rating;
+    }
+
+    public String getDirector() {
+        return this.director;
+    }
 }

@@ -2,6 +2,7 @@ package com.tvshowdatabase.backend.models;
 
 import javax.persistence.*;
 
+import lombok.NoArgsConstructor;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 import lombok.AllArgsConstructor;
@@ -11,6 +12,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
+@NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
 public class User {
@@ -27,7 +29,19 @@ public class User {
     @Column (name = "email")
     private String email;
 
-    public User() {
+    public int getUserID() {
+        return this.userID;
+    }
 
+    public String getUsername() {
+        return this.username;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public String getEmail() {
+        return this.email;
     }
 }

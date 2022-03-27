@@ -27,11 +27,9 @@ class TVShowComponent extends React.Component {
                     <tr>
                     <th>Show ID</th>
                     <th>Name</th>
-                    <th>Genre ID</th>
                     <th>Length</th>
                     <th>Year of Release</th>
                     <th>Rating</th>
-                    <th>Director</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,11 +39,9 @@ class TVShowComponent extends React.Component {
                                 <tr key = {tvShows.showID}>
                                         <td>{tvShows.showID}</td>
                                         <td>{tvShows.name}</td>
-                                        <td>{tvShows.genreID}</td>
                                         <td>{tvShows.length}</td>
                                         <td>{tvShows.yearOfRelease}</td>
                                         <td>{tvShows.rating}</td>
-                                        <td>{tvShows.director}</td>
                                 </tr>
                         )
                     }

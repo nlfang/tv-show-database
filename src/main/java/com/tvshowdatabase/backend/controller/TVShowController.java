@@ -22,6 +22,7 @@ public class TVShowController {
     @PostMapping("/tvshows")
     public ResponseEntity<TVShow> addShow(@RequestBody TVShow tvShow) {
         System.out.println(tvShow.getShowID() + "Show ID");
+        System.out.println(tvShow.getYearOfRelease());
         return new ResponseEntity<TVShow>(tvShowRepository.save(tvShow), HttpStatus.OK);
     }
 }

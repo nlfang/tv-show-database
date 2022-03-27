@@ -14,7 +14,7 @@ function AddTVShowComponent() {
     const onInputChange = e => {
         setTVShow({ ...tvShow, [e.target.name]: e.target.value })
     }
-    const { name, length, year_of_release, rating, director} = tvShow;
+    const { name, length, year_of_release, rating} = tvShow;
 
     const FormHandle = e => {
         e.preventDefault();
@@ -22,6 +22,7 @@ function AddTVShowComponent() {
     }
 
     const addShowToServer = (data) => {
+        
         axios.post("http://localhost:8888/tvshows", data).then(
             (response) => {
                 alert("Show successfully added")
@@ -43,15 +44,15 @@ function AddTVShowComponent() {
                                 <input type="text" class="form-control" name="name"  placeholder="Enter Here" value={name} onChange={(e) => onInputChange(e)} />
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Length</label>
+                                <label for="exampleInputLength1">Length</label>
                                 <input type="text" class="form-control" name="length"  placeholder="Enter Here" value={length} onChange={(e) => onInputChange(e)} />
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Year of Release</label>
+                                <label for="exampleInputYearOfRelease1">Year of Release</label>
                                 <input type="text" class="form-control" name="year_of_release"  placeholder="Enter Here" value={year_of_release} onChange={(e) => onInputChange(e)} />
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Rating</label>
+                                <label for="exampleInputRating">Rating</label>
                                 <input type="text" class="form-control" name="rating"  placeholder="Enter Here" value={rating} onChange={(e) => onInputChange(e)} />
                             </div>
                             <div className="container text-center">

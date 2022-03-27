@@ -30,13 +30,13 @@ public class TVShow {
     private int length;
 
     @Column (name = "year_of_release")
-    private int yearOfRelease;
+    private int year_of_release;
 
     @Column (name = "rating")
     private int rating;
 
-    @Column (name = "director")
-    private String director;
+    //@Column (name = "director")
+    //private String director;
 
     public int getShowID() {
         return this.showID;
@@ -51,14 +51,14 @@ public class TVShow {
     }
 
     public int getYearOfRelease() {
-        return this.yearOfRelease;
+        return this.year_of_release;
     }
 
     public int getRating() {
         return this.rating;
     }
 
-    public String getDirector() {
-        return this.director;
-    }
+    //public String getDirector() {
+        //return this.director;
+    //}
 }

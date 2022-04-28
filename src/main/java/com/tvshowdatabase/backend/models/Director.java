@@ -1,5 +1,8 @@
 package com.tvshowdatabase.backend.models;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.*;
 
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -26,6 +29,10 @@ public class Director {
     // Might need to change data type for DATE
     @Column (name = "directorDOB")
     private String DateOfBirth;
+
+    /* many to many with TVShow */
+    @ManyToMany(mappedBy = "directors", fetch = FetchType.LAZY)
+    private Set<TVShow> tvshows = new HashSet<>();
 
     public int getDirectorID() {
         return this.directorID;

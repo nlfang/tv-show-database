@@ -22,6 +22,6 @@ public interface ActorRepository extends JpaRepository<Actor, Integer> {
                     "GROUP BY a.actor_name " + 
                     "ORDER BY count DESC " + 
                     "LIMIT 3", nativeQuery = true)
-    List<Map<String, Object>> getTopActors(String username);
+    List<Map<String, Integer>> getTopActors(String username);
 
 }

@@ -22,6 +22,6 @@ public interface GenreRepository extends JpaRepository<Genre, Integer> {
                     "GROUP BY g.genre_name " + 
                     "ORDER BY count DESC " + 
                     "LIMIT 3", nativeQuery = true)
-    List<Map<String, Object>> getTopGenres(String username);
+    List<Map<String, Integer>> getTopGenres(String username);
 
 }

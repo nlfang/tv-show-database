@@ -38,7 +38,12 @@ public class UserController {
     public ResponseEntity<String> login(@RequestBody User user) {
         System.out.println(user.getUsername());
         System.out.println(user.getPassword());
-        User userquery = userRepository.findByUsername(user.getUsername()).get(0);
+        List<User> userqueryList = userRepository.findByUsername(user.getUsername());
+        // to prevent server crashing from index-out-of-bounds if username isn't in database
+        if (userqueryList.isEmpty()) {
+            return new ResponseEntity<String>("Failed to sign in", HttpStatus.UNAUTHORIZED);
+        }
+        User userquery = userqueryList.get(0);
         System.out.println(userquery.getUsername());
         System.out.println(userquery.getPassword());
         if (user.getPassword().equals(userquery.getPassword())) {
@@ -110,6 +115,27 @@ public class UserController {
         }
         // already exists
         return null;
+    }
+
+    /**
+     * Justin Stewart
+     * 
+     * change user's password
+     * 
+     * ISOLATION LEVEL EXPLANATION: REPEATABLE READ because, under read committed, their account info 
+     * could be altered (e.g, sharing account with someone else) in between the read and the write, and 
+     * this would cause the newly changed information to be reverted to how it was before (this is very 
+     * unlikely to happen, it's just to be sure). Also, there's no need to lock the entire table with 
+     * serializable since the transaction is always focusing on a single row, and we don't need to ensure
+     * passwords to be unique (accounts can have same password).
+     */
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
+    @PutMapping("/changePassword/{username}/{new}")
+    public String changePassword(@PathVariable("username") String username, @PathVariable("new") String newPassword) {
+        User u = userRepository.findByUsername(username).get(0);
+        u.setPassword(newPassword);
+        userRepository.save(u);
+        return "success";
     }
 
 }

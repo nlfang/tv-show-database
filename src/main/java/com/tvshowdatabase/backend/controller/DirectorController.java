@@ -34,7 +34,7 @@ public class DirectorController {
      */
     @Transactional(isolation = Isolation.READ_UNCOMMITTED)
     @GetMapping("/topDirectors/{username}")
-    public List<Map<String, Object>> getTopDirectorsByUsername(@PathVariable("username") String username) {
+    public List<Map<String, Integer>> getTopDirectorsByUsername(@PathVariable("username") String username) {
         return directorRepository.getTopDirectors(username);
     }
 

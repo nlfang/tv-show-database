@@ -1,6 +1,8 @@
 package com.tvshowdatabase.backend.controller;
 
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +10,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import com.tvshowdatabase.backend.models.Genre;
 import com.tvshowdatabase.backend.models.TVShow;
 import com.tvshowdatabase.backend.repository.TVShowRepository;
 @CrossOrigin(origins = "http://localhost:3000/")
@@ -42,7 +45,7 @@ public class TVShowController {
      */
     @Transactional(isolation = Isolation.READ_UNCOMMITTED)
     @GetMapping("/favorites/{username}/{sort}/{asc}")
-    public List<Object> getFavorites(@PathVariable("username") String username, 
+    public List<Map<TVShow, String>> getFavorites(@PathVariable("username") String username, 
                                         @PathVariable("sort") String sort,
                                         @PathVariable("asc") int asc) {
         if ( sort.equals("rating") ) {
@@ -67,7 +70,7 @@ public class TVShowController {
         }
 
         if ( asc > 0 )
-        return tvShowRepository.getFavoriteShowsName(username);
+            return tvShowRepository.getFavoriteShowsName(username);
     
         return tvShowRepository.getFavoriteShowsNameDesc(username);
     }

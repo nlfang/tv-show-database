@@ -22,6 +22,6 @@ public interface DirectorRepository extends JpaRepository<Director, Integer> {
                     "GROUP BY d.director_name " + 
                     "ORDER BY count DESC " + 
                     "LIMIT 3", nativeQuery = true)
-    List<Map<String, Object>> getTopDirectors(String username);
+    List<Map<String, Integer>> getTopDirectors(String username);
 
 }

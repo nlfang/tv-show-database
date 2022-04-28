@@ -34,7 +34,7 @@ public class ActorController {
      */
     @Transactional(isolation = Isolation.READ_UNCOMMITTED)
     @GetMapping("/topActors/{username}")
-    public List<Map<String, Object>> getTopGenresByUsername(@PathVariable("username") String username) {
+    public List<Map<String, Integer>> getTopGenresByUsername(@PathVariable("username") String username) {
         return actorRepository.getTopActors(username);
     }
 

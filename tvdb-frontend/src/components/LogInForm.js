@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Alert, Button, Divider, TextInput } from '@mantine/core';
 import axios from 'axios';
+import { userContext } from './userContext';
 
 export default function LogInForm() {
     const [user, setUser] = useState({
         username: '',
         password: '',
     })
+
+    const {...forLogin} = useContext(userContext); // get context's setUser function to add username to global context
 
     const FormHandle = e => {
         e.preventDefault();
@@ -21,6 +24,7 @@ export default function LogInForm() {
         axios.post('http://localhost:8888/login', data).then(
             (response) => {
                 alert("Successfully signed in")
+                forLogin.setUser(user.username); // update user's username w/i global context
             }, (error) => {
                 alert("Failed to sign in")
             }

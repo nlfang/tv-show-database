@@ -5,6 +5,7 @@ import {BrowserRouter, Routes, Route, Link} from 'react-router-dom';
 import Home from './components/Home';
 import AddTVShowComponent from './components/AddTVShowComponent';
 import LogInForm from './components/LogInForm';
+import ProfilePage from './components/ProfilePage';
 import React, {useState} from 'react';
 
 import { userContext } from './components/userContext';
@@ -37,6 +38,9 @@ function App() {
           <li>
             <Link to="/addtvshow">Add TVShow</Link>
           </li>
+          <li>
+            <Link to={`/profile/${user || ""}`}>My Profile</Link>
+          </li>
         </div>
           <Routes>
             <Route path="/" element={<Home/>}>
@@ -49,6 +53,9 @@ function App() {
             </Route>
             <Route path="/login" element={<LogInForm/>}></Route>
             <Route path="/signup" element={<SignUpForm/>}></Route>
+            <Route path="/profile">
+              <Route path=":username" element={<ProfilePage/>}/>
+            </Route>
           </Routes>
         </BrowserRouter>
       </userContext.Provider>

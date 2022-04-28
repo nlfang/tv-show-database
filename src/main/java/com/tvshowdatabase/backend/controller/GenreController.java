@@ -3,7 +3,6 @@ package com.tvshowdatabase.backend.controller;
 import java.util.List;
 import java.util.Map;
 
-import com.tvshowdatabase.backend.models.Genre;
 import com.tvshowdatabase.backend.repository.GenreRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +34,7 @@ public class GenreController {
      */
     @GetMapping("/topGenres/{username}")
     @Transactional(isolation = Isolation.READ_UNCOMMITTED)
-    public List<Map<String, Object>> getTopGenresByUsername(@PathVariable("username") String username) {
+    public List<Map<String, Integer>> getTopGenresByUsername(@PathVariable("username") String username) {
         return genreRepository.getTopGenres(username);
     }
 

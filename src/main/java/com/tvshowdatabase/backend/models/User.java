@@ -1,5 +1,8 @@
 package com.tvshowdatabase.backend.models;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.*;
 
 import lombok.NoArgsConstructor;
@@ -29,6 +32,18 @@ public class User {
     @Column (name = "email")
     private String email;
 
+    /* many to many with TVShow */
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinTable(name = "users_tvshows",
+            joinColumns = {
+                    @JoinColumn(name = "userid", referencedColumnName = "userID",
+                            nullable = false, updatable = false)},
+            inverseJoinColumns = {
+                    @JoinColumn(name = "showid", referencedColumnName = "showID",
+                            nullable = false, updatable = false)})
+    private Set<TVShow> tvshows = new HashSet<>();
+
+
     public int getUserID() {
         return this.userID;
     }
@@ -43,5 +58,13 @@ public class User {
 
     public String getEmail() {
         return this.email;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

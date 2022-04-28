@@ -1,5 +1,7 @@
 package com.tvshowdatabase.backend.models;
 
+import java.util.Set;
+
 import javax.persistence.*;
 
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -25,6 +27,10 @@ public class Actor {
 
     @Column (name = "actorDOB")
     private String DateOfBirth;
+
+    /* connect to Actor-TVShow relationship */
+    @OneToMany(mappedBy="actor")
+    private Set<ActsIn> actsIns;
 
     public int getActorID() {
         return this.actorID;

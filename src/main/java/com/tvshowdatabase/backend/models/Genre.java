@@ -1,5 +1,8 @@
 package com.tvshowdatabase.backend.models;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.*;
 
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -22,6 +25,10 @@ public class Genre {
 
     @Column (name = "genre_name")
     private String name;
+
+    /* many to many with TVShow */
+    @ManyToMany(mappedBy = "genres", fetch = FetchType.LAZY)
+    private Set<TVShow> tvshows = new HashSet<>();
 
     public int getGenreID() {
         return this.genreID;

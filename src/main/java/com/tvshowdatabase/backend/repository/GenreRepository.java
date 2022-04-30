@@ -13,11 +13,11 @@ import org.springframework.stereotype.Repository;
 public interface GenreRepository extends JpaRepository<Genre, Integer> {
 
     /* Gets 3 most frequent genres for the user */
-    @Query(value = "SELECT g.genre_name, COUNT(t.showid) AS count FROM genres g " +
-                    "INNER JOIN shows_genres sg ON g.genreid = sg.genreid " + 
-                    "INNER JOIN tv_shows t ON t.showid = sg.showid " + 
-                    "INNER JOIN users_tvshows ut ON t.showid = ut.showid " + 
-                    "INNER JOIN users u ON ut.userid = u.userid " +
+    @Query(value = "SELECT g.genre_name, COUNT(t.showID) AS count FROM genres g " +
+                    "INNER JOIN show_genres sg ON g.genreID = sg.genreID " + 
+                    "INNER JOIN tv_shows t ON t.showID = sg.showID " + 
+                    "INNER JOIN favorites fav ON t.showID = fav.showID " + 
+                    "INNER JOIN users u ON fav.userID = u.userid " +
                     "WHERE u.username = ?1 " + 
                     "GROUP BY g.genre_name " + 
                     "ORDER BY count DESC " + 

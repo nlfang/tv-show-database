@@ -1,9 +1,10 @@
 import './App.css';
 import TVShowComponent from './components/TVShowComponent';
 import UserComponent from './components/UserComponent';
+import ActorComponent from './components/ActorComponent';
 import {BrowserRouter, Routes, Route, Link} from 'react-router-dom';
 import Home from './components/Home';
-import AddTVShowComponent from './components/AddTVShowComponent';
+import AddDetail from './components/AddDetail';
 import LogInForm from './components/LogInForm';
 import ProfilePage from './components/ProfilePage';
 import React, {useState} from 'react';
@@ -27,6 +28,9 @@ function App() {
             <Link to="/tvshows">TV Show List</Link>
           </li>
           <li>
+            <Link to="/actors">Actor List</Link>
+          </li>
+          <li>
             <Link to="/users">User List</Link>
           </li>
           <li>
@@ -36,7 +40,7 @@ function App() {
             <Link to="/signup">Sign Up</Link>
           </li>
           <li>
-            <Link to="/addtvshow">Add TVShow</Link>
+            <Link to="/adddetail">Add Detail</Link>
           </li>
           <li>
             <Link to={`/profile/${user || ""}`}>My Profile</Link>
@@ -47,9 +51,11 @@ function App() {
             </Route>
             <Route path="/tvshows" element={<TVShowComponent/>}>
             </Route>
+            <Route path="/actors" element={<ActorComponent/>}>
+            </Route>
             <Route path="/users" element={<UserComponent/>}>
             </Route>
-            <Route path="/addtvshow" element={<AddTVShowComponent/>}>
+            <Route path="/adddetail" element={<AddDetail/>}>
             </Route>
             <Route path="/login" element={<LogInForm/>}></Route>
             <Route path="/signup" element={<SignUpForm/>}></Route>

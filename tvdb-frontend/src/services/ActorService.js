@@ -8,5 +8,9 @@ class ActorService {
         return axios.get(`${BASE_API_URL}/topActors/${username}`);
     }
 
+    getActors() {
+        return axios.get(`${BASE_API_URL}/actors`);
+    }
+
 }
 export default new ActorService();

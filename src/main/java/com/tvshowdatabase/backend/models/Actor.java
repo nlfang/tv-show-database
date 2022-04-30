@@ -23,10 +23,10 @@ public class Actor {
     private int actorID;
 
     @Column (name = "actorName")
-    private String name;
+    private String actorName;
 
     @Column (name = "actorDOB")
-    private String DateOfBirth;
+    private String actorDOB;
 
     /* connect to Actor-TVShow relationship */
     @OneToMany(mappedBy="actor")
@@ -36,11 +36,11 @@ public class Actor {
         return this.actorID;
     }
 
-    public String getName() {
-        return this.name;
+    public String getActorName() {
+        return this.actorName;
     }
 
     public String getDateOfBirth() {
-        return this.DateOfBirth;
+        return this.actorDOB;
     }
 }

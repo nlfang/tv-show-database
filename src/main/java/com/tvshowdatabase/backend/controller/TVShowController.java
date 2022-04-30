@@ -1,6 +1,7 @@
 package com.tvshowdatabase.backend.controller;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,5 +74,14 @@ public class TVShowController {
         return tvShowRepository.getFavoriteShowsNameDesc(username);
     }
 
-
+    /**
+     * Stanley Wang
+     *
+     * Get a specific TV Show using its ID
+     */
+    @GetMapping("/tvshows/{showID}")
+    public Optional<TVShow> getTVShow(@PathVariable("showID") int showID) {
+        System.out.println("Reached get specific TV Show");
+        return tvShowRepository.findById(showID);
+    }
 }

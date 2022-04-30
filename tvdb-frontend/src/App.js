@@ -50,6 +50,7 @@ function App() {
             <Route path="/" element={<Home/>}>
             </Route>
             <Route path="/tvshows" element={<TVShowComponent/>}>
+              <Route path=":showID" element={<TVShowPage/>}/>
             </Route>
             <Route path="/actors" element={<ActorComponent/>}>
             </Route>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 
 // Component to add TV Shows, Actors, and Directors to the database.
@@ -6,6 +6,8 @@ function AddDetail() {
     const [addTVShow, setAddTVShow] = useState(false)
     const [addActor, setAddActor] = useState(false)
     const [addDirector, setAddDirector] = useState(false)
+    const [addActorRole, setAddActorRole] = useState(false)
+    const [addDirectorRole, setAddDirectorRole] = useState(false)
 
     const [tvShow, setTVShow] = useState({
         name: '',
@@ -16,14 +18,19 @@ function AddDetail() {
 
     const [actor, setActor] = useState({
         actorName: '',
-        actorDOB: '',
+        actorDOB: ''
     });
 
     const [director, setDirector] = useState({
         directorName: '',
         directorDOB: '',
-        tvshows: ''
     });
+
+    const [actorRole, setActorRole] = useState({
+        characterName: '',
+        roleActorName: '',
+        showName: ''
+    })
 
     const onInputChange = e => {
         if (addTVShow) {
@@ -34,11 +41,14 @@ function AddDetail() {
             setActor({ ...actor, [e.target.name]: e.target.value})
         } else if (addDirector) {
             setDirector({ ...director, [e.target.name]: e.target.value})
+        } else if (addActorRole) {
+            setActorRole({ ...actorRole, [e.target.name]: e.target.value})
         }
     }
     const {name, length, year_of_release, rating} = tvShow;
     const {actorName, actorDOB} = actor;
-    const {directorName, directorDOB, tvshows} = director;
+    const {directorName, directorDOB} = director;
+    const {characterName, roleActorName, showName} = actorRole;
 
     const FormHandle = e => {
         e.preventDefault();
@@ -49,8 +59,9 @@ function AddDetail() {
             addActorToServer(actor);
         } else if (addDirector) {
             addDirectorToServer(director);
+        } else if (addActorRole) {
+            addActorRoleToServer(actorRole);
         }
-        
     }
 
     const selectChange = (e) => {
@@ -72,6 +83,11 @@ function AddDetail() {
             setAddDirector(true)
             setAddTVShow(false)
             setAddActor(false)
+        } else if (value === "actorRole") {
+            setAddDirector(false)
+            setAddTVShow(false)
+            setAddActor(false)
+            setAddActorRole(true)
         }
     }
 
@@ -88,7 +104,7 @@ function AddDetail() {
     const addActorToServer = (data) => {
         axios.post("http://localhost:8888/addactor", data).then(
             (response) => {
-                alert("Show successfully added")
+                alert("Actor successfully added")
             }, (error) => {
                 alert("Failed to add")
             }
@@ -96,9 +112,19 @@ function AddDetail() {
     }
 
     const addDirectorToServer = (data) => {
-        axios.post("http://localhost:8888/directors", data).then(
+        axios.post("http://localhost:8888/adddirector", data).then(
             (response) => {
-                alert("Show successfully added")
+                alert("Director successfully added")
+            }, (error) => {
+                alert("Failed to add")
+            }
+        );
+    }
+
+    const addActorRoleToServer = () => {
+        axios.post("http://localhost:8888/addactorrole/" + actorRole.characterName + "/" + actorRole.roleActorName + "/" + actorRole.showName).then(
+            (response) => {
+                alert("Actor role successfully added")
             }, (error) => {
                 alert("Failed to add")
             }
@@ -116,6 +142,7 @@ function AddDetail() {
                         <option value="tvshow">TV Show</option>
                         <option value="actor">Actor</option>
                         <option value="director">Director</option>
+                        <option value="actorRole">Actor Role</option>
                     </select>
                     <div>
                         {addTVShow &&
@@ -152,10 +179,6 @@ function AddDetail() {
                                 <label>Date of Birth </label>
                                 <input type="text" className="form-control" name="actorDOB" placeholder="Enter Here" value={actorDOB} onChange={(e) => onInputChange(e)}/>
                             </div>
-                            {/* <div className="form-group">
-                                <label>Acts In: (separate by commas) </label>
-                                <input type="text" className="form-control" name="actsIns" placeholder="Enter Here" value={actsIns} onChange={(e) => onInputChange(e)}/>
-                            </div> */}
                             <div className="container text-center">
                                 <button type="submit" className="btn btn-outline-secondary my-2 text-center mr-2">Add Actor</button>
                                 <button type="reset" className="btn btn-outline-primary text-center mr-2">Clear Form</button>
@@ -172,15 +195,32 @@ function AddDetail() {
                                 <label>Date of Birth </label>
                                 <input type="text" className="form-control" name="directorDOB" placeholder="Enter Here" value={directorDOB} onChange={(e) => onInputChange(e)}/>
                             </div>
-                            <div className="form-group">
-                                <label>TV Shows: (separate by commas) </label>
-                                <input type="text" className="form-control" name="tvshows" placeholder="Enter Here" value={tvshows} onChange={(e) => onInputChange(e)}/>
-                            </div>
                             <div className="container text-center">
                                 <button type="submit" className="btn btn-outline-secondary my-2 text-center mr-2">Add Actor</button>
                                 <button type="reset" className="btn btn-outline-primary text-center mr-2">Clear Form</button>
                             </div>
                         </form>}
+
+                        {addActorRole &&
+                        <form onSubmit={e => FormHandle(e)}>
+                            <div className="form-group">
+                                <label>Character Name </label>
+                                <input type="text" className="form-control" name="characterName" placeholder="Enter Here" value={characterName} onChange={(e) => onInputChange(e)}/>
+                            </div>
+                            <div className="form-group">
+                                <label>Actor Name </label>
+                                <input type="text" className="form-control" name="roleActorName" placeholder="Enter Here" value={roleActorName} onChange={(e) => onInputChange(e)}/>
+                            </div>
+                            <div className="form-group">
+                                <label>Show Name </label>
+                                <input type="text" className="form-control" name="showName" placeholder="Enter Here" value={showName} onChange={(e) => onInputChange(e)}/>
+                            </div>
+                            <div className="container text-center">
+                                <button type="submit" className="btn btn-outline-secondary my-2 text-center mr-2">Add Actor Role</button>
+                                <button type="reset" className="btn btn-outline-primary text-center mr-2">Clear Form</button>
+                            </div>
+                        </form>
+                        }
                     </div>
                 </div>
             </div>

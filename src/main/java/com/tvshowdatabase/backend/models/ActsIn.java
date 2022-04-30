@@ -31,4 +31,9 @@ public class ActsIn {
     @JoinColumn(name="showID", nullable=false)
     private TVShow tvshow;
 
+    public ActsIn(String charName, Actor actor, TVShow tvshow) {
+        this.characterName = charName;
+        this.actor = actor;
+        this.tvshow = tvshow;
+    }
 }

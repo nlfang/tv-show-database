@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import com.tvshowdatabase.backend.models.ActsIn;
+import com.tvshowdatabase.backend.repository.ActsInRepository;
 import com.tvshowdatabase.backend.models.Actor;
 import com.tvshowdatabase.backend.repository.ActorRepository;
 

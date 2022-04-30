@@ -24,4 +24,6 @@ public interface ActorRepository extends JpaRepository<Actor, Integer> {
                     "LIMIT 3", nativeQuery = true)
     List<Map<String, Integer>> getTopActors(String username);
 
+    @Query(value = "SELECT a.* FROM actors a WHERE a.actor_name = ?1", nativeQuery = true)
+    Actor getActorByName(String actorName);
 }

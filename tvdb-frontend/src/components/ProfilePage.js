@@ -282,22 +282,22 @@ const ProfilePage = props => {
                 <tbody>
                     <tr>
                         <td>{genres[0] ? genres[0].genre_name + ' - ' + genres[0].count : '-'}</td>
-                        <td>{actors[0] ? actors[0].actor_name + ' - ' + actors[0].count : '-'}</td>
-                        <td>{directors[0] ? directors[0].director_name + ' - ' + directors[0].count : '-'}</td>
+                        <td>{actors[0] ? actors[0].actorName + ' - ' + actors[0].count : '-'}</td>
+                        <td>{directors[0] ? directors[0].directorName + ' - ' + directors[0].count : '-'}</td>
                     </tr>
                 </tbody>
                 <tbody>
                     <tr>
                         <td>{genres[1] ? genres[1].genre_name + ' - ' + genres[1].count : '-'}</td>
-                        <td>{actors[1] ? actors[1].actor_name + ' - ' + actors[1].count : '-'}</td>
-                        <td>{directors[1] ? directors[1].director_name + ' - ' + directors[1].count : '-'}</td>
+                        <td>{actors[1] ? actors[1].actorName + ' - ' + actors[1].count : '-'}</td>
+                        <td>{directors[1] ? directors[1].directorName + ' - ' + directors[1].count : '-'}</td>
                     </tr>
                 </tbody>
                 <tbody>
                     <tr>
                         <td>{genres[2] ? genres[2].genre_name + ' - ' + genres[2].count : '-'}</td>
-                        <td>{actors[2] ? actors[2].actor_name + ' - ' + actors[2].count : '-'}</td>
-                        <td>{directors[2] ? directors[2].director_name + ' - ' + directors[2].count : '-'}</td>
+                        <td>{actors[2] ? actors[2].actorName + ' - ' + actors[2].count : '-'}</td>
+                        <td>{directors[2] ? directors[2].directorName + ' - ' + directors[2].count : '-'}</td>
                     </tr>
                 </tbody>
             </table>

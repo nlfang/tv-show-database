@@ -21,6 +21,7 @@ import lombok.Setter;
 public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "genreID")
     private int genreID;
 
     @Column (name = "genre_name")

@@ -12,7 +12,7 @@ import lombok.Setter;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "acts_in")
+@Table(name = "acted")
 public class ActsIn {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,12 +23,12 @@ public class ActsIn {
 
     /* connects to Actor */
     @ManyToOne
-    @JoinColumn(name="actorid", nullable=false)
+    @JoinColumn(name="actorID", nullable=false)
     private Actor actor;
 
     /* connects to TVShow */
     @ManyToOne
-    @JoinColumn(name="showid", nullable=false)
+    @JoinColumn(name="showID", nullable=false)
     private TVShow tvshow;
 
 }

@@ -21,6 +21,7 @@ import lombok.Setter;
 public class Director {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "directorID")
     private int directorID;
 
     @Column (name = "directorName")

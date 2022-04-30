@@ -13,13 +13,13 @@ import org.springframework.stereotype.Repository;
 public interface DirectorRepository extends JpaRepository<Director, Integer> {
 
     /* Gets 3 most frequent directors for the user */
-    @Query(value = "SELECT d.director_name, COUNT(t.showid) AS count FROM directors d " +
-                    "INNER JOIN shows_directors sd ON d.directorid = sd.directorid " + 
-                    "INNER JOIN tv_shows t ON t.showid = sd.showid " + 
-                    "INNER JOIN users_tvshows ut ON t.showid = ut.showid " + 
-                    "INNER JOIN users u ON ut.userid = u.userid " +
+    @Query(value = "SELECT d.directorName, COUNT(t.showID) AS count FROM directors d " +
+                    "INNER JOIN directs sd ON d.directorID = sd.directorID " + 
+                    "INNER JOIN tv_shows t ON t.showID = sd.showID " + 
+                    "INNER JOIN favorites fav ON t.showID = fav.showID " + 
+                    "INNER JOIN users u ON fav.userID = u.userid " +
                     "WHERE u.username = ?1 " + 
-                    "GROUP BY d.director_name " + 
+                    "GROUP BY d.directorName " + 
                     "ORDER BY count DESC " + 
                     "LIMIT 3", nativeQuery = true)
     List<Map<String, Integer>> getTopDirectors(String username);

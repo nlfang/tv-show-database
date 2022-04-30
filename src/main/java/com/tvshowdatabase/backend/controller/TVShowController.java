@@ -80,8 +80,10 @@ public class TVShowController {
      * Get a specific TV Show using its ID
      */
     @GetMapping("/tvshows/{showID}")
-    public Optional<TVShow> getTVShow(@PathVariable("showID") int showID) {
+    public ResponseEntity<TVShow> getTVShow(@PathVariable("showID") int showID) {
         System.out.println("Reached get specific TV Show");
-        return tvShowRepository.findById(showID);
+        TVShow show = tvShowRepository.getById(showID);
+
+        return ResponseEntity.ok(show);
     }
 }

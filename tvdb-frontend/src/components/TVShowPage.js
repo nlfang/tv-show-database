@@ -3,16 +3,30 @@ import axios from 'axios';
 import { Navigate, useLocation } from 'react-router-dom';
 import TVShowService from '../services/TVShowService'
 
-const TVShowPage = props => {
-    const location = useLocation();
-    const [showID, setShowID] = useState("");
+class TVShowPage extends React.Component {
+    constructor(props) {
+        super(props);
 
-    const [show, setShow] = useState([]);
+        this.state = {
+            showID: this.props.match.params.showID,
+            show: {}
+        }
+    }
 
-    useEffect(() => {
-        setShowID(/[^/]*$/.exec(location.pathname)[0] || "" );
-    }, [location]);
+    componentDidMount() {
+        TVShowService.getTVShow(this.state.showID).then( res => {
+            this.setState({show: res.data})
+        })
+    }
 
+    render() {
+        return(
+            <div>
+                <h1>HELLO</h1>
+                <div> {this.state.show.showName} </div>
+            </div>
+        );
+    }
 }
 
 export default TVShowPage;

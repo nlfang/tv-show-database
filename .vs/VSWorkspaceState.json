@@ -1,0 +1,18 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\main",
+    "\\src\\main\\java",
+    "\\src\\main\\java\\com",
+    "\\src\\main\\java\\com\\tvshowdatabase",
+    "\\src\\main\\java\\com\\tvshowdatabase\\backend",
+    "\\src\\main\\java\\com\\tvshowdatabase\\backend\\controller",
+    "\\tvdb-frontend",
+    "\\tvdb-frontend\\src",
+    "\\tvdb-frontend\\src\\components",
+    "\\tvdb-frontend\\src\\services"
+  ],
+  "SelectedNode": "\\src\\main\\java\\com\\tvshowdatabase\\backend\\TvShowDatabaseApplication.java",
+  "PreviewInSolutionExplorer": false
+}

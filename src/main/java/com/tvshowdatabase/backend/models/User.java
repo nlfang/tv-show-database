@@ -34,12 +34,12 @@ public class User {
 
     /* many to many with TVShow */
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinTable(name = "users_tvshows",
+    @JoinTable(name = "favorites",
             joinColumns = {
-                    @JoinColumn(name = "userid", referencedColumnName = "userID",
+                    @JoinColumn(name = "userID", referencedColumnName = "userID",
                             nullable = false, updatable = false)},
             inverseJoinColumns = {
-                    @JoinColumn(name = "showid", referencedColumnName = "showID",
+                    @JoinColumn(name = "showID", referencedColumnName = "showID",
                             nullable = false, updatable = false)})
     private Set<TVShow> tvshows = new HashSet<>();
 

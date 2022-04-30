@@ -21,6 +21,7 @@ import lombok.Setter;
 public class TVShow {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "showID")
     private int showID;
 
     @Column (name = "name")
@@ -47,23 +48,23 @@ public class TVShow {
 
     /* many to many with Genre */
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinTable(name = "shows_genres",
+    @JoinTable(name = "show_genres",
             joinColumns = {
-                    @JoinColumn(name = "showid", referencedColumnName = "showID",
+                    @JoinColumn(name = "showID", referencedColumnName = "showID",
                             nullable = false, updatable = false)},
             inverseJoinColumns = {
-                    @JoinColumn(name = "genreid", referencedColumnName = "genreID",
+                    @JoinColumn(name = "genreID", referencedColumnName = "genreID",
                             nullable = false, updatable = false)})
     private Set<Genre> genres = new HashSet<>();
 
     /* many to many with Director */
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinTable(name = "shows_directors",
+    @JoinTable(name = "directs",
             joinColumns = {
-                    @JoinColumn(name = "showid", referencedColumnName = "showID",
+                    @JoinColumn(name = "showID", referencedColumnName = "showID",
                             nullable = false, updatable = false)},
             inverseJoinColumns = {
-                    @JoinColumn(name = "directorid", referencedColumnName = "directorID",
+                    @JoinColumn(name = "directorID", referencedColumnName = "directorID",
                             nullable = false, updatable = false)})
     private Set<Director> directors = new HashSet<>();
 

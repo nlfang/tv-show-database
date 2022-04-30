@@ -20,6 +20,7 @@ import lombok.Setter;
 public class Actor {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "actorid")
     private int actorID;
 
     @Column (name = "actorName")

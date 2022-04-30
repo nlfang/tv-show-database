@@ -7,6 +7,7 @@ import Home from './components/Home';
 import AddDetail from './components/AddDetail';
 import LogInForm from './components/LogInForm';
 import ProfilePage from './components/ProfilePage';
+import TVShowPage from "./components/TVShowPage";
 import React, {useState} from 'react';
 
 import { userContext } from './components/userContext';

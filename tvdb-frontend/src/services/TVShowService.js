@@ -5,6 +5,10 @@ class TVShowService {
         return axios.get(TVSHOW_REST_API_URL);
     }
 
+    getTVShow(showID) {
+        return axios.get(`http://localhost:8888/${showID}`)
+    }
+
     getFavorites(username, sort, asc) {
         return axios.get(`http://localhost:8888/favorites/${username}/${sort}/${asc}`)
     }

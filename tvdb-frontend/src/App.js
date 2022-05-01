@@ -8,7 +8,8 @@ import AddDetail from './components/AddDetail';
 import LogInForm from './components/LogInForm';
 import ProfilePage from './components/ProfilePage';
 import TVShowPage from "./components/TVShowPage";
-import Search from './components/SearchBar';
+import SearchBar from './components/SearchBar';
+import SearchPage from './components/SearchPage';
 import React, {useState} from 'react';
 
 import { userContext } from './components/userContext';
@@ -47,7 +48,7 @@ function App() {
             <Link to={`/profile/${user || ""}`}>My Profile</Link>
           </li>
           <li>
-            <Search />
+            <SearchBar />
           </li>
         </div>
           <Routes>
@@ -67,6 +68,7 @@ function App() {
             <Route path="/profile">
               <Route path=":username" element={<ProfilePage/>}/>
             </Route>
+            <Route path="/search/:searchQuery" element={<SearchPage/>}></Route>
           </Routes>
         </BrowserRouter>
       </userContext.Provider>

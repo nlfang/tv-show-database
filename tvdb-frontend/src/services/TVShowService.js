@@ -6,7 +6,7 @@ class TVShowService {
     }
 
     getTVShow(showID) {
-        return axios.get(`http://localhost:8888/${showID}`)
+        return axios.get(`http://localhost:8888/tvshows/${showID}`)
     }
 
     getFavorites(username, sort, asc) {

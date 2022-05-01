@@ -1,6 +1,7 @@
 import React from 'react'
 import TVShowService from '../services/TVShowService'
 import {Navbar} from 'react-bootstrap'
+import {Outlet} from 'react-router-dom'
 
 class TVShowComponent extends React.Component {
     constructor(props) {
@@ -48,6 +49,7 @@ class TVShowComponent extends React.Component {
                 </tbody>
             </table>
             </div>
+            <Outlet />
             </div>
         )
     }

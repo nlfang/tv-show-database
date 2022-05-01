@@ -23,6 +23,9 @@ public interface TVShowRepository extends JpaRepository<TVShow, Integer> {
     @Query(value = "SELECT t.* FROM tv_shows t WHERE t.name = ?1", nativeQuery = true)
     TVShow getTVShowByName(String name);
 
+    @Query(value = "SELECT t.* FROM tv_shows t WHERE t.showID = ?1", nativeQuery = true)
+    TVShow getTVShowByID(int id);
+
     @Query(value = "SELECT t.*, GROUP_CONCAT(g.genre_name SEPARATOR ', ') AS genres FROM tv_shows t " +
                         "INNER JOIN favorites fav ON t.showID = fav.showID " +
                         "INNER JOIN users u ON fav.userID = u.userid " +

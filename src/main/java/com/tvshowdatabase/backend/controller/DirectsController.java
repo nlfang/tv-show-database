@@ -36,8 +36,6 @@ public class DirectsController {
                                                     @PathVariable("directsShowName") String showName) {
         int directorID = directorRepository.getDirectorID(dirName);
         int showID = tvShowRepository.getTVShowIDByName(showName);
-        System.out.println("Director ID: " + directorID);
-        System.out.println("Show ID: " + showID);
 
         Directs directs = new Directs(directorID, showID);
         return new ResponseEntity<Directs>(directsRepository.save(directs), HttpStatus.OK);

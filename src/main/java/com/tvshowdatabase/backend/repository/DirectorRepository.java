@@ -26,4 +26,10 @@ public interface DirectorRepository extends JpaRepository<Director, Integer> {
 
     @Query(value = "SELECT d.directorID FROM directors d WHERE d.director_name = ?1", nativeQuery = true)
     int getDirectorID(String directorName);
+
+    @Query(value = "SELECT d.director_name FROM directors d WHERE d.directorID = ?1", nativeQuery = true)
+    String getDirectorName(int directorID);
+
+    @Query(value = "SELECT d.directorDOB FROM directors d WHERE d.directorID = ?1", nativeQuery = true)
+    String getDirectorDOB(int directorID);
 }

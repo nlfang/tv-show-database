@@ -21,11 +21,10 @@ public class DirectorController {
     @Autowired
     private DirectorRepository directorRepository;
 
+    
     @PostMapping("/adddirector")
     public ResponseEntity<Director> addDirector(@RequestBody Director director) {
         System.out.println("Made it to addDirector");
-        System.out.println(director.getDirectorDOB());
-        System.out.println(director.getDirectorName());
         return new ResponseEntity<Director>(directorRepository.save(director), HttpStatus.OK);
     }
 

@@ -26,6 +26,11 @@ public class TVShowController {
         return tvShowRepository.findAll();
     }
 
+    /**
+     * Nicholas Fang
+     *
+     * Add a TV Show to the database
+     */
     @PostMapping("/addtvshow")
     public ResponseEntity<TVShow> addShow(@RequestBody TVShow tvShow) {
         System.out.println("Reached add TV show");

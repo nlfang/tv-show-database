@@ -12,21 +12,20 @@ import lombok.Setter;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "directs")
-public class Directs {
+@Table(name = "show_genres")
+public class show_genres {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column (name = "directsID")
-    private int directsID;
+    private int show_genre_id;
 
-    @Column (name = "directorID")
-    private int directorID;
+    @Column(name = "genreID")
+    private int genreID;
 
-    @Column (name = "showID")
+    @Column(name = "showID")
     private int showID;
 
-    public Directs(int directorID, int showID) {
-        this.directorID = directorID;
+    public show_genres(int genreID, int showID) {
+        this.genreID = genreID;
         this.showID = showID;
     }
 }

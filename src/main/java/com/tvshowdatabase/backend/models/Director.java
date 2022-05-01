@@ -35,6 +35,11 @@ public class Director {
     @ManyToMany(mappedBy = "directors", fetch = FetchType.LAZY)
     private Set<TVShow> tvshows = new HashSet<>();
 
+    public Director(String directorName, String directorDOB) {
+        this.directorName = directorName;
+        this.directorDOB = directorDOB;
+    }
+
     public int getDirectorID() {
         return this.directorID;
     }

@@ -10,6 +10,7 @@ function AddDetail() {
     const [addGenre, setAddGenre] = useState(false)
     const [addActorRole, setAddActorRole] = useState(false)
     const [addDirectorRole, setAddDirectorRole] = useState(false)
+    const [addShowGenre, setAddShowGenre] = useState(false)
 
     // Actual detail consts to be sent to the backend
     const [tvShow, setTVShow] = useState({
@@ -44,6 +45,11 @@ function AddDetail() {
         directsShowName: ''
     });
 
+    const [showGenre, setShowGenre] = useState({
+        genreName: '',
+        genreShowName: ''
+    })
+
     // Handles text input changes in the forms and sets detail consts as needed
     const onInputChange = e => {
         if (addTVShow) {
@@ -60,6 +66,8 @@ function AddDetail() {
             setActorRole({ ...actorRole, [e.target.name]: e.target.value})
         } else if (addDirectorRole) {
             setDirectorRole({ ...directorRole, [e.target.name]: e.target.value})
+        } else if (addShowGenre) {
+            setShowGenre({ ...showGenre, [e.target.name]: e.target.value})
         }
     }
 
@@ -70,6 +78,7 @@ function AddDetail() {
     const {genre_name} = genre;
     const {characterName, roleActorName, showName} = actorRole;
     const {roleDirectorName, directsShowName} = directorRole;
+    const {genreName, genreShowName} = showGenre;
 
     // Form handler to send data to backend when the submit button is pressed
     const FormHandle = e => {
@@ -87,6 +96,8 @@ function AddDetail() {
             addActorRoleToServer(actorRole);
         } else if (addDirectorRole) {
             addDirectorRoleToServer(directorRole);
+        } else if (addShowGenre) {
+            addShowGenreToServer(showGenre);
         }
     }
 
@@ -100,6 +111,7 @@ function AddDetail() {
             setAddGenre(false)
             setAddActorRole(false)
             setAddDirectorRole(false)
+            setAddShowGenre(false)
         } else if (value === "actor") {
             setAddTVShow(false)
             setAddActor(true)
@@ -107,6 +119,7 @@ function AddDetail() {
             setAddGenre(false)
             setAddActorRole(false)
             setAddDirectorRole(false)
+            setAddShowGenre(false)
         } else if (value === "director") {
             setAddTVShow(false)
             setAddActor(false)
@@ -114,6 +127,7 @@ function AddDetail() {
             setAddGenre(false)
             setAddActorRole(false)
             setAddDirectorRole(false)
+            setAddShowGenre(false)
         } else if (value === "genre") {
             setAddTVShow(false)
             setAddDirector(false)
@@ -121,6 +135,7 @@ function AddDetail() {
             setAddGenre(true)
             setAddActorRole(false)
             setAddDirectorRole(false)
+            setAddShowGenre(false)
         } else if (value === "actorRole") {
             setAddTVShow(false)
             setAddActor(false)
@@ -128,6 +143,7 @@ function AddDetail() {
             setAddGenre(false)
             setAddActorRole(true)
             setAddDirectorRole(false)
+            setAddShowGenre(false)
         } else if (value === "directorRole") {
             setAddTVShow(false)
             setAddDirector(false)
@@ -135,7 +151,16 @@ function AddDetail() {
             setAddGenre(false)
             setAddActorRole(false)
             setAddDirectorRole(true)
-        } 
+            setAddShowGenre(false)
+        } else if (value === "showGenre") {
+            setAddTVShow(false)
+            setAddDirector(false)
+            setAddActor(false)
+            setAddGenre(false)
+            setAddActorRole(false)
+            setAddDirectorRole(false)
+            setAddShowGenre(true)
+        }
     }
 
     // Functions to send data to the backend
@@ -199,6 +224,17 @@ function AddDetail() {
         )
     }
 
+    const addShowGenreToServer = () => {
+        console.log(showGenre.genre_name)
+        axios.post("http://localhost:8888/addshowgenre/" + showGenre.genreName + "/" + showGenre.genreShowName).then(
+            (response) => {
+                alert("Show genre successfully added")
+            }, (error) => {
+                alert("Failed to add")
+            }
+        )
+    }
+
     return (
         <div>
         <div className="container">
@@ -213,6 +249,7 @@ function AddDetail() {
                         <option value="genre">Genre</option>
                         <option value="actorRole">Actor Role</option>
                         <option value="directorRole">Director Role</option>
+                        <option value="showGenre">Show Genre</option>
                     </select>
                     <div>
                         {addTVShow &&
@@ -311,6 +348,22 @@ function AddDetail() {
                             </div>
                             <div className="container text-center">
                                 <button type="submit" className="btn btn-outline-secondary my-2 text-center mr-2">Add Director Role</button>
+                            </div>
+                        </form>
+                        }
+
+                        {addShowGenre &&
+                        <form onSubmit={e => FormHandle(e)}>
+                            <div className="form-group">
+                                <label>Genre Name </label>
+                                <input type="text" className="form-control" name="genreName" placeholder="Enter Here" value={genreName} onChange={(e) => onInputChange(e)}/>
+                            </div>
+                            <div className="form-group">
+                                <label>Show Name </label>
+                                <input type="text" className="form-control" name="genreShowName" placeholder="Enter Here" value={genreShowName} onChange={(e) => onInputChange(e)}/>
+                            </div>
+                            <div className="container text-center">
+                                <button type="submit" className="btn btn-outline-secondary my-2 text-center mr-2">Add Show Genre</button>
                             </div>
                         </form>
                         }

@@ -74,6 +74,8 @@ public class TVShow {
         this.rating = rating;
     }
 
+    public TVShow () {}
+
     public int getShowID() {
         return this.showID;
     }

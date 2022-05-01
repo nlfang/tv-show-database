@@ -44,6 +44,8 @@ public class Actor {
         this.actorDOB = actorDOB;
     }
 
+    public Actor() {}
+
     public int getActorID() {
         return this.actorID;
     }

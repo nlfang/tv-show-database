@@ -6,7 +6,7 @@ class TVShowService {
     }
 
     getTVShow(showID) {
-        return axios.get(`${TVSHOW_REST_API_URL}/tvshows/${showID}`)
+        return axios.get(`${TVSHOW_REST_API_URL}/${showID}`)
     }
 
     getTVShowSearch(searchQuery) {

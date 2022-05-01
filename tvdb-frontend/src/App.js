@@ -8,6 +8,8 @@ import AddDetail from './components/AddDetail';
 import LogInForm from './components/LogInForm';
 import ProfilePage from './components/ProfilePage';
 import TVShowPage from "./components/TVShowPage";
+import SearchBar from './components/SearchBar';
+import SearchPage from './components/SearchPage';
 import React, {useState} from 'react';
 
 import { userContext } from './components/userContext';
@@ -16,7 +18,6 @@ import SignUpForm from './components/SignUpForm';
 function App() {
   const [user, setUser] = useState(null);
 
-  
   return (
     <div className="App">
       <userContext.Provider value={{ user, setUser }}>
@@ -49,6 +50,9 @@ function App() {
           <li>
             <Link to={`/profile/${user || ""}`}>My Profile</Link>
           </li>
+          <li>
+            <SearchBar />
+          </li>
         </div>
           <Routes>
             <Route path="/" element={<Home/>}>
@@ -67,6 +71,7 @@ function App() {
             <Route path="/profile">
               <Route path=":username" element={<ProfilePage/>}/>
             </Route>
+            <Route path="/search/:searchQuery" element={<SearchPage/>}></Route>
           </Routes>
         </BrowserRouter>
       </userContext.Provider>

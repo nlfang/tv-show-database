@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios';
-import { Navigate, useLocation, useParams } from 'react-router-dom';
+import React from 'react'
+import { useParams } from 'react-router-dom';
 import TVShowService from '../services/TVShowService'
 
 class TVShowPage extends React.Component {

@@ -12,5 +12,9 @@ class TVShowService {
     getFavorites(username, sort, asc) {
         return axios.get(`http://localhost:8888/favorites/${username}/${sort}/${asc}`)
     }
+
+    getPopularTVShows() {
+        return axios.get('http://localhost:8888/tvshowspopular');
+    }
 }
 export default new TVShowService();

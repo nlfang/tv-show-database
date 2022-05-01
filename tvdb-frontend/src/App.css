@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+table {
+  border: 2px solid black;
+  width: 800px;
+  height: 200px;
+}
+  
+th {
+  border-bottom: 1px solid black;
+  background-color: lightblue;
+}
+  
+td {
+  text-align: center;
+  background-color: aliceblue;
+}

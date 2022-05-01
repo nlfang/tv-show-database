@@ -20,6 +20,17 @@ public class TVShowController {
     @Autowired
     private TVShowRepository tvShowRepository;
 
+    /**
+     * Nicholas Fang
+     *
+     * Gets all TV shows from the database in no particular order
+     *
+     * ISOLATION LEVEL EXPLANATION: READ UNCOMMITTED. This transaction is only reading from the database, so it is
+     * not necessary for it to have any locks. It is also better for this transaction to be faster rather than
+     * consistent and accurate, so it is ok to read any uncommitted changes that may occur from the adding TV shows
+     * method.
+     */
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
     @GetMapping("/tvshows")
     public List<TVShow> getAllTVShows() {
         System.out.println("Reached get all TV Shows");
@@ -29,8 +40,30 @@ public class TVShowController {
     /**
      * Nicholas Fang
      *
-     * Add a TV Show to the database
+     * Gets TV shows from the database sorted by their rating in descending order
+     *
+     * ISOLATION LEVEL EXPLANATION: READ UNCOMMITTED. Since this transaction is being displayed on the Home page,
+     * speed should be prioritized over accuracy in order to serve the page quickly to the user. Also, since this
+     * transaction only reads from the database, it is not necessary for it to have any locks.
      */
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
+    @GetMapping("/tvshowspopular")
+    public List<TVShow> getPopularTVShows() {
+        System.out.println("Reached home page TV Shows");
+        return tvShowRepository.getShowsByRating();
+    }
+
+    /**
+     * Nicholas Fang
+     *
+     * Add a TV Show to the database
+     *
+     * ISOLATION LEVEL EXPLANATION: SERIALIZABLE ensures that when TV shows are being added to the database,
+     * other instances of this transaction aren't being allowed through. This helps to prevent the chance of
+     * inserting two of the same TV show into the database, and also prevents phantom data from entering the
+     * database.
+     */
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     @PostMapping("/addtvshow")
     public ResponseEntity<TVShow> addShow(@RequestBody TVShow tvShow) {
         System.out.println("Reached add TV show");

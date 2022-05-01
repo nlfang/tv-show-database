@@ -27,9 +27,6 @@ public class TVShow {
     @Column (name = "name")
     private String name;
 
-    //@Column (name = "genreID")
-    //private int genreID;
-
     @Column (name = "length")
     private int length;
 
@@ -38,9 +35,6 @@ public class TVShow {
 
     @Column (name = "rating")
     private int rating;
-
-    //@Column (name = "director")
-    //private String director;
 
     /* many to many with User */
     @ManyToMany(mappedBy = "tvshows", fetch = FetchType.LAZY)
@@ -99,8 +93,4 @@ public class TVShow {
     public int getRating() {
         return this.rating;
     }
-
-    //public String getDirector() {
-        //return this.director;
-    //}
 }

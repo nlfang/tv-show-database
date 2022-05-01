@@ -21,13 +21,12 @@ class UserComponent extends React.Component {
                     <Navbar.Brand href="#">User App</Navbar.Brand>
                 </Navbar>
                 <h1 className="text-center mt-5 ">List of Users</h1>
-            <div className="container mt-2">
+            <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
             <table className="table table-bordered border-info">
                 <thead>
                     <tr>
                     <th>User ID</th>
                     <th>Username</th>
-                    <th>Password</th>
                     <th>Email</th>
                     </tr>
                 </thead>
@@ -38,7 +37,6 @@ class UserComponent extends React.Component {
                                 <tr key = {users.userID}>
                                         <td>{users.userID}</td>
                                         <td>{users.username}</td>
-                                        <td>{users.password}</td>
                                         <td>{users.email}</td>
                                 </tr>
                         )

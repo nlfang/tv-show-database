@@ -99,4 +99,7 @@ public interface TVShowRepository extends JpaRepository<TVShow, Integer> {
                         "WHERE u.username = ?1 GROUP BY t.showID ORDER BY t.year_of_release DESC", nativeQuery = true)
     List<Map<TVShow, String>> getFavoriteShowsYearDesc(String username);
 
+    @Query(value = "SELECT t.* FROM tv_shows t ORDER BY t.rating DESC", nativeQuery = true)
+    List<TVShow> getShowsByRating();
+
 }

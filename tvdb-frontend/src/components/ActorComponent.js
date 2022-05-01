@@ -22,7 +22,7 @@ class ActorComponent extends React.Component {
                     <Navbar.Brand href="#">Actors</Navbar.Brand>
                 </Navbar>
                 <h1 className="text-center mt-5 ">List of Actors</h1>
-            <div className="container mt-2">
+            <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
             <table className="table table-bordered border-info">
                 <thead>
                     <tr>
@@ -35,8 +35,8 @@ class ActorComponent extends React.Component {
                     {
                         this.state.actors.map(
                             actors =>
-                                <tr key = {actors.actorid}>
-                                        <td>{actors.actorid}</td>
+                                <tr key = {actors.actorID}>
+                                        <td>{actors.actorID}</td>
                                         <td>{actors.actorName}</td>
                                         <td>{actors.actorDOB}</td>
                                 </tr>

@@ -21,6 +21,9 @@ function App() {
     <div className="App">
       <userContext.Provider value={{ user, setUser }}>
         <BrowserRouter>
+        <div style={{position: 'absolute', left: 5}}>
+          <h1>tv-show-database</h1>
+        </div>
         <div>
           <li>
             <Link to="/">Home Page</Link>

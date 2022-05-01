@@ -62,6 +62,16 @@ public class ActorController {
         return actorRepository.getTopActors(username);
     }
 
+    /**
+     * Stanley Wang
+     *
+     * Get Actors using a search query
+     *
+     * ISOLATION LEVEL EXPLANATION: READ UNCOMMITTED since we want to prioritize speed over consistency here. We're
+     * only reading and selecting data from the database, so there won't be any conflicts anyways if the database is
+     * modified or updated. There's no need for locks to maintain accuracy.
+     */
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
     @GetMapping("actors/search/{searchQuery}")
     public List<Map<Actor, String>> getActorSearch(@PathVariable("searchQuery") String searchQuery) {
         System.out.println("Reached searching Actors");

@@ -118,6 +118,7 @@ public class TVShowController {
      *
      * Get a specific TV Show using its ID
      */
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
     @GetMapping("/tvshows/{showID}")
     public TVShow getTVShow(@PathVariable("showID") int showID) {
         System.out.println("Reached get specific TV Show: " + showID);
@@ -125,6 +126,16 @@ public class TVShowController {
         return tvShowRepository.getTVShowByID(showID);
     }
 
+    /**
+     * Stanley Wang
+     *
+     * Get TV Shows using a search query
+     *
+     * ISOLATION LEVEL EXPLANATION: READ UNCOMMITTED since we want to prioritize speed over consistency here. We're
+     * only reading and selecting data from the database, so there won't be any conflicts anyways if the database is
+     * modified or updated. There's no need for locks to maintain accuracy.
+     */
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
     @GetMapping("tvshows/search/{searchQuery}")
     public List<Map<TVShow, String>> getTVShowSearch(@PathVariable("searchQuery") String searchQuery) {
         System.out.println("Reached searching TV Shows");

@@ -57,6 +57,16 @@ public class DirectorController {
         return directorRepository.getTopDirectors(username);
     }
 
+    /**
+     * Stanley Wang
+     *
+     * Get Directors using a search query
+     *
+     * ISOLATION LEVEL EXPLANATION: READ UNCOMMITTED since we want to prioritize speed over consistency here. We're
+     * only reading and selecting data from the database, so there won't be any conflicts anyways if the database is
+     * modified or updated. There's no need for locks to maintain accuracy.
+     */
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
     @GetMapping("directors/search/{searchQuery}")
     public List<Map<Director, String>> getActorSearch(@PathVariable("searchQuery") String searchQuery) {
         System.out.println("Reached searching Directors");

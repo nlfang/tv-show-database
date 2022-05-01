@@ -8,5 +8,9 @@ class DirectorService {
         return axios.get(`${BASE_API_URL}/topDirectors/${username}`);
     }
 
+    getDirectorSearch(searchQuery) {
+        return axios.get(`${BASE_API_URL}/directors/search/${searchQuery}`);
+    }
+
 }
 export default new DirectorService();

@@ -6,11 +6,15 @@ class TVShowService {
     }
 
     getTVShow(showID) {
-        return axios.get(`http://localhost:8888/tvshows/${showID}`)
+        return axios.get(`${TVSHOW_REST_API_URL}/tvshows/${showID}`)
+    }
+
+    getTVShowSearch(searchQuery) {
+        return axios.get(`${TVSHOW_REST_API_URL}/search/${searchQuery}`)
     }
 
     getFavorites(username, sort, asc) {
-        return axios.get(`http://localhost:8888/favorites/${username}/${sort}/${asc}`)
+        return axios.get(`${TVSHOW_REST_API_URL}/${username}/${sort}/${asc}`)
     }
 }
 export default new TVShowService();

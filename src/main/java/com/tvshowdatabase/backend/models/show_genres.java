@@ -16,7 +16,7 @@ import lombok.Setter;
 public class show_genres {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int show_genre_id;
+    private int show_genres_id;
 
     @Column(name = "genreID")
     private int genreID;

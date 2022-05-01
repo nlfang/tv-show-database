@@ -29,6 +29,17 @@ public class ActsInController {
     @Autowired
     private TVShowRepository tvShowRepository;
 
+    /**
+     * Nicholas Fang
+     *
+     * Adds an actor role to the database
+     *
+     * ISOLATION LEVEL EXPLANATION: SERIALIZABLE ensures that when actor roles are being added to the database,
+     * other instances of this transaction aren't being allowed through. This helps to prevent the chance of
+     * inserting two of the same actor role into the database, and also prevents phantom data from entering the
+     * database.
+     */
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     @PostMapping("/addactorrole/{characterName}/{roleActorName}/{showName}")
     public ResponseEntity<ActsIn> addActorRole(@PathVariable("characterName") String charName,
                                                @PathVariable("roleActorName") String roleActorName,

@@ -27,11 +27,20 @@ public class ActorController {
         return actorRepository.findAll();
     }
 
+    /**
+     * Nicholas Fang
+     *
+     * Add an actor to the database
+     *
+     * ISOLATION LEVEL EXPLANATION: SERIALIZABLE ensures that when actors are being added to the database,
+     * other instances of this transaction aren't being allowed through. This helps to prevent the chance of
+     * inserting two of the same actor into the database, and also prevents phantom data from entering the
+     * database.
+     */
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     @PostMapping("/addactor")
     public ResponseEntity<Actor> addActor(@RequestBody Actor actor) {
         System.out.println("Made it to addactor");
-        System.out.println(actor.getActorName());
-        System.out.println(actor.getDateOfBirth());
         return new ResponseEntity<Actor>(actorRepository.save(actor), HttpStatus.OK);
     }
     /**

@@ -22,7 +22,7 @@ class TVShowComponent extends React.Component {
                     <Navbar.Brand href="#">TV Shows</Navbar.Brand>
                 </Navbar>
                 <h1 className="text-center mt-5 ">List of Shows</h1>
-            <div className="container mt-2">
+            <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
             <table className="table table-bordered border-info">
                 <thead>
                     <tr>

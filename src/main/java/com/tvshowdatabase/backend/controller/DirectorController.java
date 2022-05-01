@@ -21,7 +21,18 @@ public class DirectorController {
     @Autowired
     private DirectorRepository directorRepository;
 
-    
+
+    /**
+     * Nicholas Fang
+     *
+     * Add a director to the database
+     *
+     * ISOLATION LEVEL EXPLANATION: SERIALIZABLE ensures that when directors are being added to the database,
+     * other instances of this transaction aren't being allowed through. This helps to prevent the chance of
+     * inserting two of the same director into the database, and also prevents phantom data from entering the
+     * database.
+     */
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     @PostMapping("/adddirector")
     public ResponseEntity<Director> addDirector(@RequestBody Director director) {
         System.out.println("Made it to addDirector");

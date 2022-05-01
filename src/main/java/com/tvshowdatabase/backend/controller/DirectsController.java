@@ -31,6 +31,17 @@ public class DirectsController {
     @Autowired
     private TVShowRepository tvShowRepository;
 
+    /**
+     * Nicholas Fang
+     *
+     * Add a director role to the database
+     *
+     * ISOLATION LEVEL EXPLANATION: SERIALIZABLE ensures that when director roles are being added to the database,
+     * other instances of this transaction aren't being allowed through. This helps to prevent the chance of
+     * inserting two of the same director role into the database, and also prevents phantom data from entering the
+     * database.
+     */
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     @PostMapping("/adddirectorrole/{roleDirectorName}/{directsShowName}")
     public ResponseEntity<Directs> addDirectorRole (@PathVariable("roleDirectorName") String dirName,
                                                     @PathVariable("directsShowName") String showName) {

@@ -39,6 +39,11 @@ public class Actor {
         this.actorDOB = actorDOB;
     }
 
+    public Actor(String actorName, String actorDOB) {
+        this.actorName = actorName;
+        this.actorDOB = actorDOB;
+    }
+
     public int getActorID() {
         return this.actorID;
     }
@@ -47,7 +52,7 @@ public class Actor {
         return this.actorName;
     }
 
-    public String getDateOfBirth() {
+    public String getActorDOB() {
         return this.actorDOB;
     }
 }

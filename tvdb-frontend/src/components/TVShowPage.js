@@ -22,12 +22,13 @@ class TVShowPage extends React.Component {
         console.log(this.state.show)
         return(
             <div>
-                <h1>showID: {this.state.show.showID}</h1>
-                <h1>name: {this.state.show.name}</h1>
-                <h1>length: {this.state.show.length}</h1>
-                <h1>year of release: {this.state.show.year_of_release}</h1>
-                <h1>rating: {this.state.show.rating}</h1>
-                <h1>director: {this.state.show.directors}</h1>
+                <h2>{this.state.show.name}</h2>
+                <ul>
+                    <li>Show ID: {this.state.show.showID}</li>
+                    <li>Length: {this.state.show.length}</li>
+                    <li>Year of Release: {this.state.show.year_of_release}</li>
+                    <li>Rating: {this.state.show.rating}</li>
+                </ul>
             </div>
         );
     }

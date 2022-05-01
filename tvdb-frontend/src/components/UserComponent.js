@@ -36,7 +36,7 @@ class UserComponent extends React.Component {
                             users =>
                                 <tr key = {users.userID}>
                                         <td>{users.userID}</td>
-                                        <td>{users.username}</td>
+                                        <td><a href={`/profile/${users.username}`}>{users.username}</a></td>
                                         <td>{users.email}</td>
                                 </tr>
                         )

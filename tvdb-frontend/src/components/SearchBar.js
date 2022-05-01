@@ -2,7 +2,7 @@ import React from 'react'
 import TVShowService from '../services/TVShowService';
 import { Link } from 'react-router-dom'
 
-class Search extends React.Component {
+class SearchBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -26,13 +26,10 @@ class Search extends React.Component {
         return(
             <div>
                 <form action="/" method="get">
-                    <label htmlFor="header-search">
-                        <span className="visually-hidden">Search tv shows</span>
-                    </label>
                     <input
                         type="text"
                         id="header-search"
-                        placeholder="Search tv shows"
+                        placeholder="Search shows, actors, and directors"
                         name="search"
                         onChange={this.handleInput}
                     />
@@ -50,4 +47,4 @@ class Search extends React.Component {
     }
 }
 
-export default Search;
+export default SearchBar;

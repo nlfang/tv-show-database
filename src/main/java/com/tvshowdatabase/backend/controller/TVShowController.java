@@ -86,8 +86,9 @@ public class TVShowController {
      * Get a specific TV Show using its ID
      */
     @GetMapping("/tvshows/{showID}")
-    public Optional<TVShow> getTVShow(@PathVariable("showID") int showID) {
-        System.out.println("Reached get specific TV Show");
-        return tvShowRepository.findById(showID);
+    public TVShow getTVShow(@PathVariable("showID") int showID) {
+        System.out.println("Reached get specific TV Show: " + showID);
+        System.out.println(tvShowRepository.getTVShowByID(showID));
+        return tvShowRepository.getTVShowByID(showID);
     }
 }

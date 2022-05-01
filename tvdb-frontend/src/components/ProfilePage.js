@@ -316,9 +316,9 @@ const ProfilePage = props => {
                         <th className="clickable" onClick={e => handleSort('year')}>
                             {arrow.year && String.fromCharCode(arrow.year)}Release Year</th>
                         <th className="clickable" onClick={e => handleSort('length')}>
-                            {arrow.length && String.fromCharCode(arrow.length)}Length (min)</th>
+                            {arrow.length && String.fromCharCode(arrow.length)}Length (# eps)</th>
                         <th className="clickable" onClick={e => handleSort('rating')}>
-                            {arrow.rating && String.fromCharCode(arrow.rating)}Rating/10</th>
+                            {arrow.rating && String.fromCharCode(arrow.rating)}Rating/5</th>
                         <th>Genre(s)</th>
                     </tr>
                 </thead>

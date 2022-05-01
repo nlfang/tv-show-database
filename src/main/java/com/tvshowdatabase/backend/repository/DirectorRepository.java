@@ -35,6 +35,6 @@ public interface DirectorRepository extends JpaRepository<Director, Integer> {
     @Query(value = "SELECT d.directorDOB FROM directors d WHERE d.directorID = ?1", nativeQuery = true)
     String getDirectorDOB(int directorID);
 
-    @Query(value = "SELECT d.* FROM actors d WHERE d.director_name LIKE CONCAT('%', :director_name, '%')", nativeQuery = true)
+    @Query(value = "SELECT d.* FROM directors d WHERE d.director_name LIKE CONCAT('%', :director_name, '%')", nativeQuery = true)
     List<Map<Director, String>> getDirectorSearch(@Param("director_name") String searchQuery);
 }

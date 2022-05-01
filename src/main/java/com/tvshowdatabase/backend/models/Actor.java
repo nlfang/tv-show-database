@@ -33,9 +33,10 @@ public class Actor {
     @OneToMany(mappedBy="actor")
     private Set<ActsIn> actsIns;
 
-    public Actor(String roleActorName, String s) {
-        this.actorName = roleActorName;
-        this.actorDOB = s;
+    public Actor(int actorID, String actorName, String actorDOB) {
+        this.actorID = actorID;
+        this.actorName = actorName;
+        this.actorDOB = actorDOB;
     }
 
     public int getActorID() {

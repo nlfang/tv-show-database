@@ -28,6 +28,7 @@ public class TVShowController {
 
     @PostMapping("/addtvshow")
     public ResponseEntity<TVShow> addShow(@RequestBody TVShow tvShow) {
+        System.out.println("Reached add TV show");
         return new ResponseEntity<TVShow>(tvShowRepository.save(tvShow), HttpStatus.OK);
     }
 

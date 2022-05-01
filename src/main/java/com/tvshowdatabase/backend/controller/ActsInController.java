@@ -33,13 +33,17 @@ public class ActsInController {
     public ResponseEntity<ActsIn> addActorRole(@PathVariable("characterName") String charName,
                                                @PathVariable("roleActorName") String roleActorName,
                                                @PathVariable("showName") String showName) {
-        //This function doesn't work
-        System.out.println(charName);
-        System.out.println(roleActorName);
-        System.out.println(showName);
-        Actor actor = actorRepository.getActorByName(roleActorName);
-        TVShow tvshow = tvShowRepository.getTVShowByName(showName);
-        ActsIn actsIn = new ActsIn(charName, actor, tvshow);
+        int actorID = actorRepository.getActorIDByName(roleActorName);
+        String actorDOB = actorRepository.getActorDOB(roleActorName);
+
+        int tvShowID = tvShowRepository.getTVShowIDByName(showName);
+        int tvShowLength = tvShowRepository.getTVShowLength(showName);
+        int tvShowYOR = tvShowRepository.getTVShowYOR(showName);
+        int tvShowRating = tvShowRepository.getTVShowRating(showName);
+
+        Actor actor = new Actor(actorID, roleActorName, actorDOB);
+        TVShow tvShow = new TVShow(tvShowID, showName, tvShowLength, tvShowYOR, tvShowRating);
+        ActsIn actsIn = new ActsIn(charName, actor, tvShow);
         return new ResponseEntity<ActsIn>(actsInRepository.save(actsIn), HttpStatus.OK);
     }
 }

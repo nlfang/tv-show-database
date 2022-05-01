@@ -72,10 +72,8 @@ public class TVShow {
     @OneToMany(mappedBy="tvshow")
     private Set<ActsIn> actsIns;
 
-    public TVShow(int i, String showName, int i1, int i2, int i3) {
-    }
-
-    public TVShow(String showName, int length, int year_of_release, int rating) {
+    public TVShow(int showID, String showName, int length, int year_of_release, int rating) {
+        this.showID = showID;
         this.name = showName;
         this.length = length;
         this.year_of_release = year_of_release;

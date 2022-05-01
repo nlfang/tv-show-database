@@ -43,7 +43,7 @@ public class Director {
         return this.directorName;
     }
 
-    public String getDateOfBirth() {
+    public String getDirectorDOB() {
         return this.directorDOB;
     }
 }

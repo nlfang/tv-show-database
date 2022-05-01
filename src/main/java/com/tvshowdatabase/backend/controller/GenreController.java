@@ -3,15 +3,15 @@ package com.tvshowdatabase.backend.controller;
 import java.util.List;
 import java.util.Map;
 
+import com.tvshowdatabase.backend.models.Genre;
 import com.tvshowdatabase.backend.repository.GenreRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://localhost:3000/")
 @RestController
@@ -20,6 +20,12 @@ public class GenreController {
     @Autowired
     private GenreRepository genreRepository;
 
+    @PostMapping ("/addgenre/{genre_name}")
+    public ResponseEntity<Genre> addGenre(@PathVariable("genre_name") String genreName) {
+        System.out.println("Made it to addGenre");
+        Genre genre = new Genre(genreName);
+        return new ResponseEntity<Genre>(genreRepository.save(genre), HttpStatus.OK);
+    }
     /**
      * Justin Stewart
      * 

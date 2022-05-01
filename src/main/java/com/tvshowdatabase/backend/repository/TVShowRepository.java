@@ -20,8 +20,17 @@ public interface TVShowRepository extends JpaRepository<TVShow, Integer> {
 //             "WHERE us.username = ?1 ORDER BY t.name ASC")
 //     List<Object> getFavoriteShowsName(String username);
 
-    @Query(value = "SELECT t.* FROM tv_shows t WHERE t.name = ?1", nativeQuery = true)
-    TVShow getTVShowByName(String name);
+    @Query(value = "SELECT t.showID FROM tv_shows t WHERE t.name = ?1", nativeQuery = true)
+    int getTVShowIDByName(String name);
+
+    @Query(value = "SELECT t.length FROM tv_shows t WHERE t.name = ?1", nativeQuery = true)
+    int getTVShowLength(String name);
+
+    @Query(value = "SELECT t.year_of_release FROM tv_shows t WHERE t.name = ?1", nativeQuery = true)
+    int getTVShowYOR(String name);
+
+    @Query(value = "SELECT t.rating FROM tv_shows t WHERE t.name = ?1", nativeQuery = true)
+    int getTVShowRating(String name);
 
     @Query(value = "SELECT t.*, GROUP_CONCAT(g.genre_name SEPARATOR ', ') AS genres FROM tv_shows t " +
                         "INNER JOIN favorites fav ON t.showID = fav.showID " +

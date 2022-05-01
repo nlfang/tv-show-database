@@ -3,6 +3,7 @@ package com.tvshowdatabase.backend.controller;
 import java.util.List;
 import java.util.Map;
 
+import com.tvshowdatabase.backend.models.TVShow;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,13 @@ public class ActorController {
     @GetMapping("/topActors/{username}")
     public List<Map<String, Integer>> getTopGenresByUsername(@PathVariable("username") String username) {
         return actorRepository.getTopActors(username);
+    }
+
+    @GetMapping("actors/search/{searchQuery}")
+    public List<Map<Actor, String>> getActorSearch(@PathVariable("searchQuery") String searchQuery) {
+        System.out.println("Reached searching Actors");
+        System.out.println(actorRepository.getActorSearch(searchQuery));
+        return actorRepository.getActorSearch(searchQuery);
     }
 
 }

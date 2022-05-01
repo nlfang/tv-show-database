@@ -6,6 +6,7 @@ import java.util.Map;
 import com.tvshowdatabase.backend.models.TVShow;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.tvshowdatabase.backend.models.Genre;
@@ -34,6 +35,9 @@ public interface TVShowRepository extends JpaRepository<TVShow, Integer> {
 
     @Query(value = "SELECT t.* FROM tv_shows t WHERE t.showID = ?1", nativeQuery = true)
     TVShow getTVShowByID(int id);
+
+    @Query(value = "SELECT t.* FROM Tv_shows t WHERE t.name LIKE CONCAT('%', :name, '%')", nativeQuery = true)
+    List<Map<TVShow, String>> getTVShowSearch(@Param("name") String searchQuery);
 
     @Query(value = "SELECT t.*, GROUP_CONCAT(g.genre_name SEPARATOR ', ') AS genres FROM tv_shows t " +
                         "INNER JOIN favorites fav ON t.showID = fav.showID " +

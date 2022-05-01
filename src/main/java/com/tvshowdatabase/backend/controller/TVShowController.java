@@ -124,4 +124,11 @@ public class TVShowController {
         System.out.println(tvShowRepository.getTVShowByID(showID));
         return tvShowRepository.getTVShowByID(showID);
     }
+
+    @GetMapping("tvshows/search/{searchQuery}")
+    public List<Map<TVShow, String>> getTVShowSearch(@PathVariable("searchQuery") String searchQuery) {
+        System.out.println("Reached searching TV Shows");
+        System.out.println(tvShowRepository.getTVShowSearch(searchQuery));
+        return tvShowRepository.getTVShowSearch(searchQuery);
+    }
 }

@@ -57,4 +57,11 @@ public class DirectorController {
         return directorRepository.getTopDirectors(username);
     }
 
+    @GetMapping("directors/search/{searchQuery}")
+    public List<Map<Director, String>> getActorSearch(@PathVariable("searchQuery") String searchQuery) {
+        System.out.println("Reached searching Directors");
+        System.out.println(directorRepository.getDirectorSearch(searchQuery));
+        return directorRepository.getDirectorSearch(searchQuery);
+    }
+
 }

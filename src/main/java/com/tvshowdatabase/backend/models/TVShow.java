@@ -35,6 +35,9 @@ public class TVShow {
     @Column (name = "rating")
     private int rating;
 
+    @Column (name = "genreID")
+    private int genreID;
+
     /* many to many with User */
     @ManyToMany(mappedBy = "tvshows", fetch = FetchType.LAZY)
     private Set<User> users = new HashSet<>();
@@ -67,12 +70,13 @@ public class TVShow {
 
     public TVShow(){}
 
-    public TVShow(int showID, String showName, int length, int year_of_release, int rating) {
+    public TVShow(int showID, String showName, int length, int year_of_release, int rating, int genreID) {
         this.showID = showID;
         this.name = showName;
         this.length = length;
         this.year_of_release = year_of_release;
         this.rating = rating;
+        this.genreID = genreID;
     }
 
     public int getShowID() {

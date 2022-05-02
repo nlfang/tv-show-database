@@ -31,13 +31,18 @@ public class Director {
     @Column (name = "directorDOB")
     private String directorDOB;
 
+    @Column (name = "directsID")
+    private int directsID;
+
     /* many to many with TVShow */
     @ManyToMany(mappedBy = "directors", fetch = FetchType.LAZY)
     private Set<TVShow> tvshows = new HashSet<>();
 
-    public Director(String directorName, String directorDOB) {
+    public Director(int directorID, String directorName, String directorDOB, int directsID) {
+        this.directorID = directorID;
         this.directorName = directorName;
         this.directorDOB = directorDOB;
+        this.directsID = directsID;
     }
 
     public int getDirectorID() {

@@ -39,24 +39,24 @@ public class ActsInController {
      * inserting two of the same actor role into the database, and also prevents phantom data from entering the
      * database.
      */
-    @Transactional(isolation = Isolation.SERIALIZABLE)
-    @PostMapping("/addactorrole/{characterName}/{roleActorName}/{showName}")
-    public ResponseEntity<String> addActorRole(@PathVariable("characterName") String charName,
-                                               @PathVariable("roleActorName") String roleActorName,
-                                               @PathVariable("showName") String showName) {
-        int actorID = actorRepository.getActorIDByName(roleActorName);
-        String actorDOB = actorRepository.getActorDOB(roleActorName);
-
-        int tvShowID = tvShowRepository.getTVShowIDByName(showName);
-        int tvShowLength = tvShowRepository.getTVShowLength(showName);
-        int tvShowYOR = tvShowRepository.getTVShowYOR(showName);
-        int tvShowRating = tvShowRepository.getTVShowRating(showName);
-
-        Actor actor = new Actor(actorID, roleActorName, actorDOB);
-        TVShow tvShow = new TVShow(tvShowID, showName, tvShowLength, tvShowYOR, tvShowRating);
-        ActsIn actsIn = new ActsIn(charName, actor, tvShow);
-        actor.addActsIns(actsIn);
-        actsInRepository.save(actsIn);
-        return new ResponseEntity<String>("Success", HttpStatus.OK);
-    }
+//    @Transactional(isolation = Isolation.SERIALIZABLE)
+//    @PostMapping("/addactorrole/{characterName}/{roleActorName}/{showName}")
+//    public ResponseEntity<String> addActorRole(@PathVariable("characterName") String charName,
+//                                               @PathVariable("roleActorName") String roleActorName,
+//                                               @PathVariable("showName") String showName) {
+//        int actorID = actorRepository.getActorIDByName(roleActorName);
+//        String actorDOB = actorRepository.getActorDOB(roleActorName);
+//
+//        int tvShowID = tvShowRepository.getTVShowIDByName(showName);
+//        int tvShowLength = tvShowRepository.getTVShowLength(showName);
+//        int tvShowYOR = tvShowRepository.getTVShowYOR(showName);
+//        int tvShowRating = tvShowRepository.getTVShowRating(showName);
+//
+//        Actor actor = new Actor(actorID, roleActorName, actorDOB);
+//        TVShow tvShow = new TVShow(tvShowID, showName, tvShowLength, tvShowYOR, tvShowRating);
+//        ActsIn actsIn = new ActsIn(charName, actor, tvShow);
+//        actor.addActsIns(actsIn);
+//        actsInRepository.save(actsIn);
+//        return new ResponseEntity<String>("Success", HttpStatus.OK);
+//    }
 }

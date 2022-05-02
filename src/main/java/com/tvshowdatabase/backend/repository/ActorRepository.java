@@ -26,10 +26,10 @@ public interface ActorRepository extends JpaRepository<Actor, Integer> {
                     "LIMIT 3", nativeQuery = true)
     List<Map<String, Integer>> getTopActors(String username);
 
-    @Query(value = "SELECT a.actorid FROM actors a WHERE a.actor_name = ?1", nativeQuery = true)
+    @Query(value = "SELECT a.actorid FROM actors a WHERE a.actor_name = ?1 AND a.actsID = 0 LIMIT 1", nativeQuery = true)
     int getActorIDByName(String actorName);
 
-    @Query(value = "SELECT a.actorDOB FROM actors a WHERE a.actor_name = ?1", nativeQuery = true)
+    @Query(value = "SELECT a.actorDOB FROM actors a WHERE a.actor_name = ?1 AND a.actsID = 0 LIMIT 1", nativeQuery = true)
     String getActorDOB(String actorName);
 
     @Query(value = "SELECT a.* FROM actors a WHERE a.actor_name LIKE CONCAT('%', :actor_name, '%')", nativeQuery = true)

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Map;
 
+import com.tvshowdatabase.backend.models.show_genres;
+import com.tvshowdatabase.backend.repository.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,9 @@ import com.tvshowdatabase.backend.repository.TVShowRepository;
 public class TVShowController {
     @Autowired
     private TVShowRepository tvShowRepository;
+
+    @Autowired
+    private GenreRepository genreRepository;
 
     /**
      * Nicholas Fang
@@ -141,5 +146,31 @@ public class TVShowController {
         System.out.println("Reached searching TV Shows");
         System.out.println(tvShowRepository.getTVShowSearch(searchQuery));
         return tvShowRepository.getTVShowSearch(searchQuery);
+    }
+
+    /**
+     * Nicholas Fang
+     *
+     * Add a show genre mapping to the database
+     *
+     * ISOLATION LEVEL EXPLANATION: SERIALIZABLE ensures that when TV shows' genres are being added to the database,
+     * other instances of this transaction aren't being allowed through. This helps to prevent the chance of
+     * inserting two of the same TV shows' genre into the database, and also prevents phantom data from entering the
+     * database.
+     */
+    @Transactional(isolation = Isolation.SERIALIZABLE)
+    @PostMapping("/addshowgenre/{genreName}/{showName}")
+    public ResponseEntity<String> addShowGenres (@PathVariable("genreName") String genreName,
+                                                      @PathVariable("showName") String showName) {
+        int genreID = genreRepository.getGenreID(genreName);
+        int showID = tvShowRepository.getTVShowIDByName(showName);
+
+        int showLength = tvShowRepository.getTVShowLength(showName);
+        int showYOR = tvShowRepository.getTVShowYOR(showName);
+        int showRating = tvShowRepository.getTVShowRating(showName);
+
+        TVShow tvshow = new TVShow(showID, showName, showLength, showYOR, showRating, genreID);
+        tvShowRepository.save(tvshow);
+        return new ResponseEntity<String>("Success", HttpStatus.OK);
     }
 }

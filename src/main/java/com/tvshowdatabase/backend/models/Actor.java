@@ -29,21 +29,31 @@ public class Actor {
     @Column (name = "actorDOB")
     private String actorDOB;
 
+    @Column (name = "actsID")
+    private int actsID;
+
+    @Column (name = "charName")
+    private String charName;
+
     /* connect to Actor-TVShow relationship */
     @OneToMany(mappedBy="actor")
     private Set<ActsIn> actsIns = new HashSet<>();
 
-    public Actor(int actorID, String actorName, String actorDOB) {
+    public Actor(int actorID, String actorName, String actorDOB, int actsID, String charName) {
         this.actorID = actorID;
         this.actorName = actorName;
         this.actorDOB = actorDOB;
+        this.actsID = actsID;
+        this.charName= charName;
     }
 
     public Actor(){}
 
-    public Actor(String actorName, String actorDOB) {
+    public Actor(String actorName, String actorDOB, int actsID, String charName) {
         this.actorName = actorName;
         this.actorDOB = actorDOB;
+        this.actsID = actsID;
+        this.charName = charName;
     }
 
     public int getActorID() {

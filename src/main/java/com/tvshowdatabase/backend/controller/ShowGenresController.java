@@ -41,14 +41,14 @@ public class ShowGenresController {
      * inserting two of the same TV shows' genre into the database, and also prevents phantom data from entering the
      * database.
      */
-    @Transactional(isolation = Isolation.SERIALIZABLE)
-    @PostMapping("/addshowgenre/{genreName}/{showName}")
-    public ResponseEntity<show_genres> addShowGenres (@PathVariable("genreName") String genreName,
-                                                    @PathVariable("showName") String showName) {
-        int genreID = genreRepository.getGenreID(genreName);
-        int showID = tvShowRepository.getTVShowIDByName(showName);
-
-        show_genres showGenres = new show_genres(genreID, showID);
-        return new ResponseEntity<show_genres>(showGenresRepository.save(showGenres), HttpStatus.OK);
-    }
+//    @Transactional(isolation = Isolation.SERIALIZABLE)
+//    @PostMapping("/addshowgenre/{genreName}/{showName}")
+//    public ResponseEntity<show_genres> addShowGenres (@PathVariable("genreName") String genreName,
+//                                                    @PathVariable("showName") String showName) {
+//        int genreID = genreRepository.getGenreID(genreName);
+//        int showID = tvShowRepository.getTVShowIDByName(showName);
+//
+//        show_genres showGenres = new show_genres(genreID, showID);
+//        return new ResponseEntity<show_genres>(showGenresRepository.save(showGenres), HttpStatus.OK);
+//    }
 }

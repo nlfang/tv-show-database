@@ -5,8 +5,10 @@ import java.util.Map;
 
 import com.tvshowdatabase.backend.models.Actor;
 import com.tvshowdatabase.backend.models.Director;
+import com.tvshowdatabase.backend.models.Directs;
 import com.tvshowdatabase.backend.repository.DirectorRepository;
 
+import com.tvshowdatabase.backend.repository.TVShowRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,8 @@ public class DirectorController {
     @Autowired
     private DirectorRepository directorRepository;
 
+    @Autowired
+    private TVShowRepository tvShowRepository;
 
     /**
      * Nicholas Fang
@@ -72,6 +76,30 @@ public class DirectorController {
         System.out.println("Reached searching Directors");
         System.out.println(directorRepository.getDirectorSearch(searchQuery));
         return directorRepository.getDirectorSearch(searchQuery);
+    }
+
+    /**
+     * Nicholas Fang
+     *
+     * Add a director role to the database
+     *
+     * ISOLATION LEVEL EXPLANATION: SERIALIZABLE ensures that when director roles are being added to the database,
+     * other instances of this transaction aren't being allowed through. This helps to prevent the chance of
+     * inserting two of the same director role into the database, and also prevents phantom data from entering the
+     * database.
+     */
+    @Transactional(isolation = Isolation.SERIALIZABLE)
+    @PostMapping("/adddirectorrole/{roleDirectorName}/{directsShowName}")
+    public ResponseEntity<String> addDirectorRole (@PathVariable("roleDirectorName") String dirName,
+                                                    @PathVariable("directsShowName") String showName) {
+        int directorID = directorRepository.getDirectorID(dirName);
+        int showID = tvShowRepository.getTVShowIDByName(showName);
+
+        String dirDOB = directorRepository.getDirectorDOB(directorID);
+
+        Director director = new Director(directorID, dirName, dirDOB, showID);
+        directorRepository.save(director);
+        return new ResponseEntity<String>("Success", HttpStatus.OK);
     }
 
 }

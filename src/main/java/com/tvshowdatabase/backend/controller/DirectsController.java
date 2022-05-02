@@ -41,14 +41,14 @@ public class DirectsController {
      * inserting two of the same director role into the database, and also prevents phantom data from entering the
      * database.
      */
-    @Transactional(isolation = Isolation.SERIALIZABLE)
-    @PostMapping("/adddirectorrole/{roleDirectorName}/{directsShowName}")
-    public ResponseEntity<Directs> addDirectorRole (@PathVariable("roleDirectorName") String dirName,
-                                                    @PathVariable("directsShowName") String showName) {
-        int directorID = directorRepository.getDirectorID(dirName);
-        int showID = tvShowRepository.getTVShowIDByName(showName);
-
-        Directs directs = new Directs(directorID, showID);
-        return new ResponseEntity<Directs>(directsRepository.save(directs), HttpStatus.OK);
-    }
+//    @Transactional(isolation = Isolation.SERIALIZABLE)
+//    @PostMapping("/adddirectorrole/{roleDirectorName}/{directsShowName}")
+//    public ResponseEntity<Directs> addDirectorRole (@PathVariable("roleDirectorName") String dirName,
+//                                                    @PathVariable("directsShowName") String showName) {
+//        int directorID = directorRepository.getDirectorID(dirName);
+//        int showID = tvShowRepository.getTVShowIDByName(showName);
+//
+//        Directs directs = new Directs(directorID, showID);
+//        return new ResponseEntity<Directs>(directsRepository.save(directs), HttpStatus.OK);
+//    }
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.tvshowdatabase.backend.models.TVShow;
+import com.tvshowdatabase.backend.repository.TVShowRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,41 @@ public class ActorController {
     @Autowired
     private ActorRepository actorRepository;
 
+    @Autowired
+    private TVShowRepository tvShowRepository;
+
+    @Autowired
+    private ActsInRepository actsInRepository;
+
     @GetMapping("/actors")
     public List<Actor> getAllActors() {
         System.out.println("Reached get all actors");
         return actorRepository.findAll();
+    }
+
+    /**
+     * Nicholas Fang
+     *
+     * Adds an actor role to the database
+     *
+     * ISOLATION LEVEL EXPLANATION: SERIALIZABLE ensures that when actor roles are being added to the database,
+     * other instances of this transaction aren't being allowed through. This helps to prevent the chance of
+     * inserting two of the same actor role into the database, and also prevents phantom data from entering the
+     * database.
+     */
+    @Transactional(isolation = Isolation.SERIALIZABLE)
+    @PostMapping("/addactorrole/{characterName}/{roleActorName}/{showName}")
+    public ResponseEntity<String> addActorRole(@PathVariable("characterName") String charName,
+                                               @PathVariable("roleActorName") String roleActorName,
+                                               @PathVariable("showName") String showName) {
+        int actorID = actorRepository.getActorIDByName(roleActorName);
+        String actorDOB = actorRepository.getActorDOB(roleActorName);
+
+        int showID = tvShowRepository.getTVShowIDByName(showName);
+
+        Actor actor = new Actor(actorID, roleActorName, actorDOB, showID, charName);
+        actorRepository.save(actor);
+        return new ResponseEntity<String>("Success", HttpStatus.OK);
     }
 
     /**

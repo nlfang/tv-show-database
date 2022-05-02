@@ -1,6 +1,7 @@
 import React from 'react'
 import TVShowService from '../services/TVShowService'
 import {Navbar} from 'react-bootstrap'
+import {Outlet} from 'react-router-dom'
 
 class TVShowComponent extends React.Component {
     constructor(props) {
@@ -21,7 +22,7 @@ class TVShowComponent extends React.Component {
                     <Navbar.Brand href="#">TV Shows</Navbar.Brand>
                 </Navbar>
                 <h1 className="text-center mt-5 ">List of Shows</h1>
-            <div className="container mt-2">
+            <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
             <table className="table table-bordered border-info">
                 <thead>
                     <tr>
@@ -37,7 +38,7 @@ class TVShowComponent extends React.Component {
                         this.state.tvShows.map(
                             tvShows =>
                                 <tr key = {tvShows.showID}>
-                                        <td>{tvShows.showID}</td>
+                                        <td><a href={'/tvshows/' + tvShows.showID}>{tvShows.showID}</a></td>
                                         <td>{tvShows.name}</td>
                                         <td>{tvShows.length}</td>
                                         <td>{tvShows.yearOfRelease}</td>
@@ -48,6 +49,7 @@ class TVShowComponent extends React.Component {
                 </tbody>
             </table>
             </div>
+            <Outlet />
             </div>
         )
     }

@@ -24,4 +24,6 @@ public interface GenreRepository extends JpaRepository<Genre, Integer> {
                     "LIMIT 3", nativeQuery = true)
     List<Map<String, Integer>> getTopGenres(String username);
 
+    @Query(value = "SELECT g.genreID FROM genres g WHERE g.genre_name = ?1", nativeQuery = true)
+    int getGenreID(String genre_name);
 }

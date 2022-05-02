@@ -25,17 +25,21 @@ public class Genre {
     private int genreID;
 
     @Column (name = "genre_name")
-    private String name;
+    private String genre_name;
 
     /* many to many with TVShow */
     @ManyToMany(mappedBy = "genres", fetch = FetchType.LAZY)
     private Set<TVShow> tvshows = new HashSet<>();
 
+    public Genre(String genreName) {
+        this.genre_name = genreName;
+    }
+
     public int getGenreID() {
         return this.genreID;
     }
 
-    public String getName() {
-        return this.name;
+    public String getGenreName() {
+        return this.genre_name;
     }
 }

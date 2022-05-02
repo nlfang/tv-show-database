@@ -36,7 +36,7 @@ export default function SignUpForm() {
     
 
     return(
-        <div>m
+        <div>
             <h1 className="text-xl font-bold"> Please Sign Up </h1>
             <form onSubmit={e => FormHandle(e)}>
                 <label>

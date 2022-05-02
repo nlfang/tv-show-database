@@ -25,25 +25,30 @@ public class Director {
     private int directorID;
 
     @Column (name = "directorName")
-    private String name;
+    private String directorName;
 
     // Might need to change data type for DATE
     @Column (name = "directorDOB")
-    private String DateOfBirth;
+    private String directorDOB;
 
     /* many to many with TVShow */
     @ManyToMany(mappedBy = "directors", fetch = FetchType.LAZY)
     private Set<TVShow> tvshows = new HashSet<>();
+
+    public Director(String directorName, String directorDOB) {
+        this.directorName = directorName;
+        this.directorDOB = directorDOB;
+    }
 
     public int getDirectorID() {
         return this.directorID;
     }
 
     public String getName() {
-        return this.name;
+        return this.directorName;
     }
 
-    public String getDateOfBirth() {
-        return this.DateOfBirth;
+    public String getDirectorDOB() {
+        return this.directorDOB;
     }
 }

@@ -24,24 +24,35 @@ public class Actor {
     private int actorID;
 
     @Column (name = "actorName")
-    private String name;
+    private String actorName;
 
     @Column (name = "actorDOB")
-    private String DateOfBirth;
+    private String actorDOB;
 
     /* connect to Actor-TVShow relationship */
     @OneToMany(mappedBy="actor")
     private Set<ActsIn> actsIns;
 
+    public Actor(int actorID, String actorName, String actorDOB) {
+        this.actorID = actorID;
+        this.actorName = actorName;
+        this.actorDOB = actorDOB;
+    }
+
+    public Actor(String actorName, String actorDOB) {
+        this.actorName = actorName;
+        this.actorDOB = actorDOB;
+    }
+
     public int getActorID() {
         return this.actorID;
     }
 
-    public String getName() {
-        return this.name;
+    public String getActorName() {
+        return this.actorName;
     }
 
-    public String getDateOfBirth() {
-        return this.DateOfBirth;
+    public String getActorDOB() {
+        return this.actorDOB;
     }
 }

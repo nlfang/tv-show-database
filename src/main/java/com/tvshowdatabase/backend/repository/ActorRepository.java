@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.tvshowdatabase.backend.models.Actor;
+import com.tvshowdatabase.backend.models.TVShow;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -24,4 +26,12 @@ public interface ActorRepository extends JpaRepository<Actor, Integer> {
                     "LIMIT 3", nativeQuery = true)
     List<Map<String, Integer>> getTopActors(String username);
 
+    @Query(value = "SELECT a.actorid FROM actors a WHERE a.actor_name = ?1", nativeQuery = true)
+    int getActorIDByName(String actorName);
+
+    @Query(value = "SELECT a.actorDOB FROM actors a WHERE a.actor_name = ?1", nativeQuery = true)
+    String getActorDOB(String actorName);
+
+    @Query(value = "SELECT a.* FROM actors a WHERE a.actor_name LIKE CONCAT('%', :actor_name, '%')", nativeQuery = true)
+    List<Map<Actor, String>> getActorSearch(@Param("actor_name") String searchQuery);
 }

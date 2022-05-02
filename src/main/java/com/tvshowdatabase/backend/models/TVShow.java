@@ -27,9 +27,6 @@ public class TVShow {
     @Column (name = "name")
     private String name;
 
-    //@Column (name = "genreID")
-    //private int genreID;
-
     @Column (name = "length")
     private int length;
 
@@ -38,9 +35,6 @@ public class TVShow {
 
     @Column (name = "rating")
     private int rating;
-
-    //@Column (name = "director")
-    //private String director;
 
     /* many to many with User */
     @ManyToMany(mappedBy = "tvshows", fetch = FetchType.LAZY)
@@ -72,6 +66,14 @@ public class TVShow {
     @OneToMany(mappedBy="tvshow")
     private Set<ActsIn> actsIns;
 
+    public TVShow(int showID, String showName, int length, int year_of_release, int rating) {
+        this.showID = showID;
+        this.name = showName;
+        this.length = length;
+        this.year_of_release = year_of_release;
+        this.rating = rating;
+    }
+
     public int getShowID() {
         return this.showID;
     }
@@ -91,8 +93,4 @@ public class TVShow {
     public int getRating() {
         return this.rating;
     }
-
-    //public String getDirector() {
-        //return this.director;
-    //}
 }

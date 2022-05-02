@@ -41,7 +41,7 @@ public class ActsInController {
      */
     @Transactional(isolation = Isolation.SERIALIZABLE)
     @PostMapping("/addactorrole/{characterName}/{roleActorName}/{showName}")
-    public ResponseEntity<ActsIn> addActorRole(@PathVariable("characterName") String charName,
+    public ResponseEntity<String> addActorRole(@PathVariable("characterName") String charName,
                                                @PathVariable("roleActorName") String roleActorName,
                                                @PathVariable("showName") String showName) {
         int actorID = actorRepository.getActorIDByName(roleActorName);
@@ -55,6 +55,8 @@ public class ActsInController {
         Actor actor = new Actor(actorID, roleActorName, actorDOB);
         TVShow tvShow = new TVShow(tvShowID, showName, tvShowLength, tvShowYOR, tvShowRating);
         ActsIn actsIn = new ActsIn(charName, actor, tvShow);
-        return new ResponseEntity<ActsIn>(actsInRepository.save(actsIn), HttpStatus.OK);
+        actor.addActsIns(actsIn);
+        actsInRepository.save(actsIn);
+        return new ResponseEntity<String>("Success", HttpStatus.OK);
     }
 }

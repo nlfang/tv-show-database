@@ -15,7 +15,6 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "tv_shows")
 public class TVShow {
@@ -65,6 +64,8 @@ public class TVShow {
     /* connect to Actor-TVShow relationship */
     @OneToMany(mappedBy="tvshow")
     private Set<ActsIn> actsIns;
+
+    public TVShow(){}
 
     public TVShow(int showID, String showName, int length, int year_of_release, int rating) {
         this.showID = showID;

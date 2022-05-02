@@ -1,5 +1,6 @@
 package com.tvshowdatabase.backend.models;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -14,7 +15,6 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "actors")
 public class Actor {
@@ -31,13 +31,15 @@ public class Actor {
 
     /* connect to Actor-TVShow relationship */
     @OneToMany(mappedBy="actor")
-    private Set<ActsIn> actsIns;
+    private Set<ActsIn> actsIns = new HashSet<>();
 
     public Actor(int actorID, String actorName, String actorDOB) {
         this.actorID = actorID;
         this.actorName = actorName;
         this.actorDOB = actorDOB;
     }
+
+    public Actor(){}
 
     public Actor(String actorName, String actorDOB) {
         this.actorName = actorName;
@@ -54,5 +56,13 @@ public class Actor {
 
     public String getActorDOB() {
         return this.actorDOB;
+    }
+
+    public Set<ActsIn> getActsIn() {
+        return this.actsIns;
+    }
+
+    public void addActsIns(ActsIn actsIn) {
+        this.actsIns.add(actsIn);
     }
 }

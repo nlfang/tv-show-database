@@ -1,9 +1,14 @@
 package com.tvshowdatabase.backend.controller;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 import com.tvshowdatabase.backend.models.TVShow;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Isolation;
@@ -18,6 +23,18 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @Value("${spring.datasource.url}")
+    private String springDatasourceUrl;
+
+    @Value("${spring.datasource.driver-class-name}")
+    private String springDatasourceDriverClassName;
+
+    @Value("${spring.datasource.username}")
+    private String springDatasourceUsername;
+
+    @Value("${spring.datasource.password}")
+    private String springDatasourcePassword;
+
     @GetMapping("/users")
     public List<User> getAllUsers() {
         System.out.println("Reached get all users");
@@ -27,13 +44,47 @@ public class UserController {
         return userRepository.findAll();
     }
 
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     @PostMapping("/signup")
-    public ResponseEntity<User> addUser(@RequestBody User user) {
+    public ResponseEntity<String> addUser(@RequestBody User user) {
         System.out.println("reached signup");
-        System.out.println(user.getUsername());
-        return new ResponseEntity<User>(userRepository.save(user), HttpStatus.OK);
+        List<User> usernameCheck = userRepository.findByUsername(user.getUsername());
+        if (!usernameCheck.isEmpty()) {
+            System.out.println("Duplicate Username");
+            return new ResponseEntity<String>("Username already in use, failed to sign up", HttpStatus.CONFLICT);
+        }
+        List<User> emailCheck = userRepository.findByEmail(user.getEmail());
+        if (!emailCheck.isEmpty()) {
+            System.out.println("Duplicate Email");
+            return new ResponseEntity<String>("Email already in use, failed to sign up", HttpStatus.CONFLICT);
+        }
+
+        String addString = "INSERT INTO users (email, password, username) VALUES (?, ?, ?)";
+        try ( Connection conn = DriverManager.getConnection(
+                springDatasourceUrl, springDatasourceUsername, springDatasourcePassword);
+              PreparedStatement preparedStatement = conn.prepareStatement(addString)) {
+
+            preparedStatement.setString(1, user.getEmail());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getUsername());
+            boolean result = preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return new ResponseEntity<String>("Exception occurred, failed to sign up", HttpStatus.UNAUTHORIZED);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<String>("Exception occurred, failed to sign up", HttpStatus.UNAUTHORIZED);
+
+        }
+
+        //System.out.println(user.getUsername());
+        //return new ResponseEntity<User>(userRepository.save(user), HttpStatus.OK);
+        return new ResponseEntity<String>("Succesfully signed up", HttpStatus.OK);
     }
 
+
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody User user) {
         System.out.println(user.getUsername());

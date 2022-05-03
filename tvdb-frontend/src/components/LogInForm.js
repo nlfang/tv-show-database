@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, Router } from 'react';
 import { Alert, Button, Divider, TextInput } from '@mantine/core';
 import axios from 'axios';
 import { userContext } from './userContext';
@@ -25,6 +25,7 @@ export default function LogInForm() {
             (response) => {
                 alert("Successfully signed in")
                 forLogin.setUser(user.username); // update user's username w/i global context
+                window.location.replace("http://localhost:3000/profile/" + user.username)
             }, (error) => {
                 alert("Failed to sign in")
             }

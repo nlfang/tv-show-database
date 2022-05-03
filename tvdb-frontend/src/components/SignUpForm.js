@@ -41,7 +41,7 @@ export default function SignUpForm() {
             <form onSubmit={e => FormHandle(e)}>
                 <label>
                     <p>Email Address</p>
-                    <input type="text" id="email" name="email" required value={email} onChange={(e) => onInputChange(e)}></input>
+                    <input type="email" id="email" name="email" required value={email} onChange={(e) => onInputChange(e)}></input>
                 </label>
                 <label>
                     <p>Username</p>

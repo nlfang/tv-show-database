@@ -29,6 +29,19 @@ public class ActorController {
     }
 
     /**
+     * Rithwik Palivela
+     *
+     * Get an actor by their id
+     *
+     * ISOLATION LEVEL EXPLANATION: READ_UNCOMMITTED
+     */
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
+    @GetMapping("/actors/{actorid}")
+    public Actor getActorByID(@PathVariable("actorid") int actorid) {
+        return actorRepository.getActorByID(actorid);
+    }
+
+    /**
      * Nicholas Fang
      *
      * Add an actor to the database

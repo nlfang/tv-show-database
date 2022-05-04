@@ -11,7 +11,7 @@ class ActorComponent extends React.Component {
         }
     }
     componentDidMount() {
-        ActorService.getActors().then((Response)=>{
+        ActorService.getAllActors().then((Response)=>{
             this.setState({actors:Response.data})
         });
     }
@@ -36,7 +36,7 @@ class ActorComponent extends React.Component {
                         this.state.actors.map(
                             actors =>
                                 <tr key = {actors.actorID}>
-                                        <td>{actors.actorID}</td>
+                                    <td><a href={'/actors/' + actors.actorID}>{actors.actorID}</a></td>
                                         <td>{actors.actorName}</td>
                                         <td>{actors.actorDOB}</td>
                                 </tr>

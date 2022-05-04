@@ -35,6 +35,18 @@ public class UserController {
     @Value("${spring.datasource.password}")
     private String springDatasourcePassword;
 
+
+    /**
+     * David Long
+     * 
+     * Returns all the users and their details from the database
+     * 
+     * ISOLATION LEVEL EXPLANATION: READ UNCOMMITTED
+     * This endpoint is not something important for our actual functionality, it's just to
+     * display a list of the users and their details. In a production environment, this wouldn't exist.
+     * Thus, the accuracy is not important and only speed matters.
+     */
+
     @GetMapping("/users")
     public List<User> getAllUsers() {
         System.out.println("Reached get all users");
@@ -44,7 +56,18 @@ public class UserController {
         return userRepository.findAll();
     }
 
-    @Transactional(isolation = Isolation.READ_COMMITTED)
+
+    /**
+     * David Long
+     *
+     * Attempts to sign up the user with the given account details
+     *
+     * ISOLATION LEVEL EXPLANATION: SERIALIZABLE
+     * The transaction to add a user to the database needs to be serializable to ensure that two users do not
+     * create accounts at the same time with the same username or same email address. These are both
+     * identifying factors that we need to lock the entire table for.
+     */
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     @PostMapping("/signup")
     public ResponseEntity<String> addUser(@RequestBody User user) {
         System.out.println("reached signup");
@@ -83,8 +106,17 @@ public class UserController {
         return new ResponseEntity<String>("Succesfully signed up", HttpStatus.OK);
     }
 
-
-    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
+    /**
+     * David Long
+     *
+     * Attempts to log in the user with the given details
+     *
+     * ISOLATION LEVEL EXPLANATION: REPEATABLE READ
+     * We want to retrieve a committed username and password since login is more important than
+     * just displaying a list. Additionally, we want to make sure that when we pull from the database,
+     * the username and password cannot be modified at the same time (account sharing) so login works smoothly.
+     */
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody User user) {
         System.out.println(user.getUsername());

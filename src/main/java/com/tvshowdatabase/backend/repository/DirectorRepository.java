@@ -27,7 +27,7 @@ public interface DirectorRepository extends JpaRepository<Director, Integer> {
     List<Map<String, Integer>> getTopDirectors(String username);
 
     @Query(value = "SELECT d.* FROM directors d WHERE d.directorID = ?1", nativeQuery = true)
-    List<Map<Director, String>> getDirectorByID(@Param("directorID") int directorID);
+    Director getDirectorByID(@Param("directorID") int directorID);
 
     @Query(value = "SELECT d.directorID FROM directors d WHERE d.director_name = ?1", nativeQuery = true)
     int getDirectorID(String directorName);

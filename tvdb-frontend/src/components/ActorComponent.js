@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import ActorService from '../services/ActorService';
-import {Navbar} from 'react-bootstrap'
+import { Navbar } from 'react-bootstrap';
+import { Outlet } from 'react-router-dom';
 
 class ActorComponent extends React.Component {
     constructor(props) {
@@ -28,7 +29,6 @@ class ActorComponent extends React.Component {
                     <tr>
                     <th>Actor ID</th>
                     <th>Name</th>
-                    <th>Date of Birth</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,13 +38,13 @@ class ActorComponent extends React.Component {
                                 <tr key = {actors.actorID}>
                                     <td><a href={'/actors/' + actors.actorID}>{actors.actorID}</a></td>
                                         <td>{actors.actorName}</td>
-                                        <td>{actors.actorDOB}</td>
                                 </tr>
                         )
                     }
                 </tbody>
             </table>
-            </div>
+                </div>
+                <Outlet />
             </div>
         )
     }

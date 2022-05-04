@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import DirectorService from '../services/DirectorService';
-import { Navbar } from 'react-bootstrap'
+import { Navbar } from 'react-bootstrap';
+import { Outlet } from 'react-router-dom';
 
 class DirectorComponent extends React.Component {
     constructor(props) {
@@ -28,7 +29,6 @@ class DirectorComponent extends React.Component {
                             <tr>
                                 <th>Director ID</th>
                                 <th>Name</th>
-                                <th>Date of Birth</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -36,15 +36,15 @@ class DirectorComponent extends React.Component {
                                 this.state.directors.map(
                                     directors =>
                                         <tr key={directors.directorID}>
-                                            <td>{directors.directorID}</td>
+                                            <td><a href={'/directors/' + directors.directorID}>{directors.directorID}</a></td>
                                             <td>{directors.directorName}</td>
-                                            <td>{directors.directorDOB}</td>
                                         </tr>
                                 )
                             }
                         </tbody>
                     </table>
                 </div>
+            <Outlet />
             </div>
         )
     }

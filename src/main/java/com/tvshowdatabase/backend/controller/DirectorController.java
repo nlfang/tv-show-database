@@ -36,7 +36,8 @@ public class DirectorController {
      */
     @Transactional(isolation = Isolation.READ_UNCOMMITTED)
     @GetMapping("directors/{directorID}")
-    public List<Map<Director, String>> getDirectorByID(@PathVariable("directorID") int directorID) {
+    public Director getDirectorByID(@PathVariable("directorID") int directorID) {
+        System.out.println("Reached get director by id");
         return directorRepository.getDirectorByID(directorID);
     }
 

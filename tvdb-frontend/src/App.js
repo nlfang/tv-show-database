@@ -2,7 +2,9 @@ import './App.css';
 import TVShowComponent from './components/TVShowComponent';
 import UserComponent from './components/UserComponent';
 import ActorComponent from './components/ActorComponent';
+import ActorPageComponent from './components/ActorPageComponent';
 import DirectorComponent from './components/DirectorComponent';
+import DirectorPageComponent from './components/DirectorPageComponent';
 import {BrowserRouter, Routes, Route, Link} from 'react-router-dom';
 import Home from './components/Home';
 import AddDetail from './components/AddDetail';
@@ -16,7 +18,6 @@ import React, {useState} from 'react';
 import { userContext } from './components/userContext';
 import SignUpForm from './components/SignUpForm';
 import Button from 'react-bootstrap/Button';
-import ActorPageComponent from './components/ActorPageComponent';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -74,6 +75,20 @@ function App() {
                 </button>
               </Link>
             </li>
+            <li style={{ display: 'inline' }}>
+              <Link to="/actors">
+                <button type="button">
+                  Actor list
+                </button>
+              </Link>
+            </li>
+            <li style={{ display: 'inline' }}>
+              <Link to="/directors">
+                <button type="button">
+                  Director list
+                </button>
+              </Link>
+            </li>
             <li style={{display: 'inline'}}>
               <Link to="/users">
                 <button type="button">
@@ -120,10 +135,11 @@ function App() {
             <Route path="/tvshows" element={<TVShowComponent/>}>
               <Route path=":showID" element={<TVShowPage/>}></Route>
             </Route>
-            <Route path="/actors" element={<ActorComponent />}>
+            <Route path="/actors" element={<ActorComponent/>}>
               <Route path=":actorID" element={<ActorPageComponent/>}></Route>
             </Route>
             <Route path="/directors" element={<DirectorComponent/>}>
+              <Route path=":directorID" element={<DirectorPageComponent/>}></Route>
             </Route>
             <Route path="/users" element={<UserComponent/>}>
             </Route>

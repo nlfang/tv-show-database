@@ -21,6 +21,24 @@ public class DirectorController {
     @Autowired
     private DirectorRepository directorRepository;
 
+    @GetMapping("/directors")
+    public List<Director> getAllDirectors() {
+        System.out.println("Reached get all directors");
+        return directorRepository.findAll();
+    }
+
+    /**
+     * Rithwik Palivela
+     *
+     * Get a director by their id
+     *
+     * ISOLATION LEVEL EXPLANATION: READ_UNCOMMITTED
+     */
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
+    @GetMapping("directors/{directorID}")
+    public List<Map<Director, String>> getDirectorByID(@PathVariable("directorID") int directorID) {
+        return directorRepository.getDirectorByID(directorID);
+    }
 
     /**
      * Nicholas Fang

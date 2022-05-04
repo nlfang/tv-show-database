@@ -2,6 +2,7 @@ import './App.css';
 import TVShowComponent from './components/TVShowComponent';
 import UserComponent from './components/UserComponent';
 import ActorComponent from './components/ActorComponent';
+import DirectorComponent from './components/DirectorComponent';
 import {BrowserRouter, Routes, Route, Link} from 'react-router-dom';
 import Home from './components/Home';
 import AddDetail from './components/AddDetail';
@@ -36,6 +37,9 @@ function App() {
             <Link to="/actors">Actor List</Link>
           </li>
           <li>
+            <Link to="/directors">Director List</Link>
+          </li>
+          <li>
             <Link to="/users">User List</Link>
           </li>
           <li>
@@ -61,6 +65,8 @@ function App() {
               <Route path=":showID" element={<TVShowPage/>}></Route>
             </Route>
             <Route path="/actors" element={<ActorComponent/>}>
+            </Route>
+            <Route path="/directors" element={<DirectorComponent/>}>
             </Route>
             <Route path="/users" element={<UserComponent/>}>
             </Route>

@@ -36,9 +36,10 @@ public class ActorController {
      * ISOLATION LEVEL EXPLANATION: READ_UNCOMMITTED
      */
     @Transactional(isolation = Isolation.READ_UNCOMMITTED)
-    @GetMapping("/actors/{actorid}")
-    public Actor getActorByID(@PathVariable("actorid") int actorid) {
-        return actorRepository.getActorByID(actorid);
+    @GetMapping("/actors/{actorID}")
+    public Actor getActorByID(@PathVariable("actorID") int actorID) {
+        System.out.println("Reached get actor by id");
+        return actorRepository.getActorByID(actorID);
     }
 
     /**

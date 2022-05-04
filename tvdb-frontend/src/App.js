@@ -2,6 +2,7 @@ import './App.css';
 import TVShowComponent from './components/TVShowComponent';
 import UserComponent from './components/UserComponent';
 import ActorComponent from './components/ActorComponent';
+import ActorPageComponent from './components/ActorPageComponent';
 import DirectorComponent from './components/DirectorComponent';
 import {BrowserRouter, Routes, Route, Link} from 'react-router-dom';
 import Home from './components/Home';
@@ -16,7 +17,6 @@ import React, {useState} from 'react';
 import { userContext } from './components/userContext';
 import SignUpForm from './components/SignUpForm';
 import Button from 'react-bootstrap/Button';
-import ActorPageComponent from './components/ActorPageComponent';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -117,7 +117,7 @@ function App() {
             <Route path="/tvshows" element={<TVShowComponent/>}>
               <Route path=":showID" element={<TVShowPage/>}></Route>
             </Route>
-            <Route path="/actors" element={<ActorComponent />}>
+            <Route path="/actors" element={<ActorComponent/>}>
               <Route path=":actorID" element={<ActorPageComponent/>}></Route>
             </Route>
             <Route path="/directors" element={<DirectorComponent/>}>

@@ -65,9 +65,12 @@ public class UserController {
      * ISOLATION LEVEL EXPLANATION: SERIALIZABLE
      * The transaction to add a user to the database needs to be serializable to ensure that two users do not
      * create accounts at the same time with the same username or same email address. These are both
-     * identifying factors that we need to lock the entire table for.
+     * identifying factors that we need to lock the entire table for. The method's isolation level is set to
+     * REPEATABLE_READ, as when it is set to SERIALIZABLE, the prepared statement will time out.
+     * To deal with this, the connection's isolation level is set to SERIALIZABLE when using the prepared
+     * statement.
      */
-    @Transactional(isolation = Isolation.SERIALIZABLE)
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     @PostMapping("/signup")
     public ResponseEntity<String> addUser(@RequestBody User user) {
         System.out.println("reached signup");
@@ -87,10 +90,12 @@ public class UserController {
                 springDatasourceUrl, springDatasourceUsername, springDatasourcePassword);
               PreparedStatement preparedStatement = conn.prepareStatement(addString)) {
 
+            conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
             preparedStatement.setString(1, user.getEmail());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getUsername());
             boolean result = preparedStatement.execute();
+            System.out.println("reached after executing");
         } catch (SQLException e) {
             e.printStackTrace();
             return new ResponseEntity<String>("Exception occurred, failed to sign up", HttpStatus.UNAUTHORIZED);

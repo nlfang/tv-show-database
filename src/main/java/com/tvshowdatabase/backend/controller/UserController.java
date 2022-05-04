@@ -1,9 +1,14 @@
 package com.tvshowdatabase.backend.controller;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 import com.tvshowdatabase.backend.models.TVShow;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Isolation;
@@ -18,6 +23,30 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @Value("${spring.datasource.url}")
+    private String springDatasourceUrl;
+
+    @Value("${spring.datasource.driver-class-name}")
+    private String springDatasourceDriverClassName;
+
+    @Value("${spring.datasource.username}")
+    private String springDatasourceUsername;
+
+    @Value("${spring.datasource.password}")
+    private String springDatasourcePassword;
+
+
+    /**
+     * David Long
+     * 
+     * Returns all the users and their details from the database
+     * 
+     * ISOLATION LEVEL EXPLANATION: READ UNCOMMITTED
+     * This endpoint is not something important for our actual functionality, it's just to
+     * display a list of the users and their details. In a production environment, this wouldn't exist.
+     * Thus, the accuracy is not important and only speed matters.
+     */
+
     @GetMapping("/users")
     public List<User> getAllUsers() {
         System.out.println("Reached get all users");
@@ -27,13 +56,72 @@ public class UserController {
         return userRepository.findAll();
     }
 
+
+    /**
+     * David Long
+     *
+     * Attempts to sign up the user with the given account details
+     *
+     * ISOLATION LEVEL EXPLANATION: SERIALIZABLE
+     * The transaction to add a user to the database needs to be serializable to ensure that two users do not
+     * create accounts at the same time with the same username or same email address. These are both
+     * identifying factors that we need to lock the entire table for. The method's isolation level is set to
+     * REPEATABLE_READ, as when it is set to SERIALIZABLE, the prepared statement will time out.
+     * To deal with this, the connection's isolation level is set to SERIALIZABLE when using the prepared
+     * statement.
+     */
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     @PostMapping("/signup")
-    public ResponseEntity<User> addUser(@RequestBody User user) {
+    public ResponseEntity<String> addUser(@RequestBody User user) {
         System.out.println("reached signup");
-        System.out.println(user.getUsername());
-        return new ResponseEntity<User>(userRepository.save(user), HttpStatus.OK);
+        List<User> usernameCheck = userRepository.findByUsername(user.getUsername());
+        if (!usernameCheck.isEmpty()) {
+            System.out.println("Duplicate Username");
+            return new ResponseEntity<String>("Username already in use, failed to sign up", HttpStatus.CONFLICT);
+        }
+        List<User> emailCheck = userRepository.findByEmail(user.getEmail());
+        if (!emailCheck.isEmpty()) {
+            System.out.println("Duplicate Email");
+            return new ResponseEntity<String>("Email already in use, failed to sign up", HttpStatus.CONFLICT);
+        }
+
+        String addString = "INSERT INTO users (email, password, username) VALUES (?, ?, ?)";
+        try ( Connection conn = DriverManager.getConnection(
+                springDatasourceUrl, springDatasourceUsername, springDatasourcePassword);
+              PreparedStatement preparedStatement = conn.prepareStatement(addString)) {
+
+            conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+            preparedStatement.setString(1, user.getEmail());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getUsername());
+            boolean result = preparedStatement.execute();
+            System.out.println("reached after executing");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return new ResponseEntity<String>("Exception occurred, failed to sign up", HttpStatus.UNAUTHORIZED);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<String>("Exception occurred, failed to sign up", HttpStatus.UNAUTHORIZED);
+
+        }
+
+        //System.out.println(user.getUsername());
+        //return new ResponseEntity<User>(userRepository.save(user), HttpStatus.OK);
+        return new ResponseEntity<String>("Succesfully signed up", HttpStatus.OK);
     }
 
+    /**
+     * David Long
+     *
+     * Attempts to log in the user with the given details
+     *
+     * ISOLATION LEVEL EXPLANATION: REPEATABLE READ
+     * We want to retrieve a committed username and password since login is more important than
+     * just displaying a list. Additionally, we want to make sure that when we pull from the database,
+     * the username and password cannot be modified at the same time (account sharing) so login works smoothly.
+     */
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody User user) {
         System.out.println(user.getUsername());

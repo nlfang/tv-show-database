@@ -1,6 +1,6 @@
 import React from 'react'
 import ActorService from '../services/ActorService'
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom'
 import { Navbar } from 'react-bootstrap'
 
 class ActorPageComponent extends React.Component {

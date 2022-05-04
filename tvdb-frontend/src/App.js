@@ -15,6 +15,7 @@ import React, {useState} from 'react';
 
 import { userContext } from './components/userContext';
 import SignUpForm from './components/SignUpForm';
+import Button from 'react-bootstrap/Button';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -27,6 +28,7 @@ function App() {
           <h1>tv-show-database</h1>
         </div>
         <div>
+<<<<<<< HEAD
           <li>
             <Link to="/">Home Page</Link>
           </li>
@@ -57,6 +59,59 @@ function App() {
           <li>
             <SearchBar />
           </li>
+=======
+          <ul>
+            <li style={{display: 'inline'}}>
+              <Link to="/">
+                <button type="button">
+                  Home Page
+                </button>
+              </Link>
+            </li>
+            <li style={{display: 'inline'}}>
+              <Link to="/tvshows">
+                <button type="button">
+                  TV Show list
+                </button>
+              </Link>
+            </li>
+            <li style={{display: 'inline'}}>
+              <Link to="/users">
+                <button type="button">
+                  User List
+                </button>
+              </Link>
+            </li>
+            <li style={{display: 'inline'}}>
+              <Link to="/login">
+                <button type="button">
+                  Login
+                </button>
+              </Link>
+            </li>
+            <li style={{display: 'inline'}}>
+              <Link to="/signup">
+                <button type="button">
+                  Sign up
+                </button>
+              </Link>
+            </li>
+            <li style={{display: 'inline'}}>
+              <Link to="/addtvshow">
+                <button type="button">
+                  Add TV Show
+                </button>
+              </Link>
+            </li>
+            <li style={{display: 'inline'}}>
+              <Link to={`/profile/${user || ""}`}>
+                <button type="button">
+                  My Profile
+                </button>
+              </Link>
+            </li>
+          </ul>
+>>>>>>> 244588e911846dad716b62033e288cbf0e3ad784
         </div>
           <Routes>
             <Route path="/" element={<Home/>}>

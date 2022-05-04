@@ -37,7 +37,7 @@ public class ActorController {
      */
     @Transactional(isolation = Isolation.READ_UNCOMMITTED)
     @GetMapping("/actors/{actorid}")
-    public List<Map<Actor, Integer>> getActorByID(@PathVariable("actorid") int actorid) {
+    public Actor getActorByID(@PathVariable("actorid") int actorid) {
         return actorRepository.getActorByID(actorid);
     }
 

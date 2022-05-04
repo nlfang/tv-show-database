@@ -16,6 +16,7 @@ import React, {useState} from 'react';
 import { userContext } from './components/userContext';
 import SignUpForm from './components/SignUpForm';
 import Button from 'react-bootstrap/Button';
+import ActorPageComponent from './components/ActorPageComponent';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -28,7 +29,6 @@ function App() {
           <h1>tv-show-database</h1>
         </div>
         <div>
-<<<<<<< HEAD
           <li>
             <Link to="/">Home Page</Link>
           </li>
@@ -59,7 +59,6 @@ function App() {
           <li>
             <SearchBar />
           </li>
-=======
           <ul>
             <li style={{display: 'inline'}}>
               <Link to="/">
@@ -111,7 +110,6 @@ function App() {
               </Link>
             </li>
           </ul>
->>>>>>> 244588e911846dad716b62033e288cbf0e3ad784
         </div>
           <Routes>
             <Route path="/" element={<Home/>}>
@@ -119,7 +117,8 @@ function App() {
             <Route path="/tvshows" element={<TVShowComponent/>}>
               <Route path=":showID" element={<TVShowPage/>}></Route>
             </Route>
-            <Route path="/actors" element={<ActorComponent/>}>
+            <Route path="/actors" element={<ActorComponent />}>
+              <Route path=":actorID" element={<ActorPageComponent/>}></Route>
             </Route>
             <Route path="/directors" element={<DirectorComponent/>}>
             </Route>

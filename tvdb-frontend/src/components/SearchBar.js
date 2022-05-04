@@ -15,18 +15,36 @@ class SearchBar extends React.Component {
         this.setState({searchQuery: event.target.value })
     }
 
-    logValue = () => {
-        console.log("Searched for: " + this.state.searchQuery);
+    handleSubmit = () => {
         TVShowService.getTVShows().then((res) => {
             this.setState({searchResult: res.data})
         })
+
+        console.log("here")
     }
+
+    // componentDidUpdate(prevProps) {
+    //     if (this.props.match.params.id !== prevProps.match.params.id) {
+    //         this.setState({ searchQuery: this.props.match.id })
+    //     }
+    // }
 
     render() {
         return(
             <div>
-                <form action="/" method="get">
-                    <input
+                <form onSubmit={this.handleSubmit}>
+                    <label>
+                        <input 
+                            type="text" 
+                            placeholder="Search shows, actors, and directors"
+                            value={this.state.searchQuery} 
+                            onChange={this.handleInput}>
+                        </input>
+                    </label>
+                    <Link to={`/search/${this.state.searchQuery}`}>
+                        <input type="submit" value="Seach" onClick={this.handleSubmit}></input>
+                    </Link>
+                    {/* <input
                         type="text"
                         id="header-search"
                         placeholder="Search shows, actors, and directors"
@@ -40,7 +58,7 @@ class SearchBar extends React.Component {
                         >
                             Search
                         </button>
-                    </Link>
+                    </Link> */}
                 </form>
             </div>
         );

@@ -77,6 +77,9 @@ function App() {
                 </button>
               </Link>
             </li>
+            <li style={{display: 'inline'}}>
+              <SearchBar />
+            </li>
           </ul>
         </div>
           <Routes>

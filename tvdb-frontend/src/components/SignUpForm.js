@@ -28,11 +28,17 @@ export default function SignUpForm() {
                 (response) => {
                     alert("User successfully added")
                 }, (error) => {
-                    alert("failed to add")
+                    alert("failed to add");
+                    alert(error);
                 }
             )
         }
     }
+
+    const [passwordShown, setPasswordShown] = useState(false);
+    const togglePassword = () => {
+        setPasswordShown(!passwordShown);
+      };
     
 
     return(
@@ -49,12 +55,15 @@ export default function SignUpForm() {
                 </label>
                 <label>
                     <p>Password</p>
-                    <input type="password" id="password" name="password" required value={password} onChange={(e) => onInputChange(e)}/>
+                    <input type={passwordShown ? "text" : "password"} id="password" name="password" required value={password} onChange={(e) => onInputChange(e)}/>
                 </label>
                 <label>
                     <p>Confirm Password</p>
-                    <input type="password" id="confirm_password" name="confirm_password" required value={confirm_password} onChange={(e) => onInputChange(e)}/>
+                    <input type={passwordShown ? "text" : "password"} id="confirm_password" name="confirm_password" required value={confirm_password} onChange={(e) => onInputChange(e)}/>
                 </label>
+                <div>
+                Show Password<input type="checkbox" onClick={togglePassword}/>
+                </div>
                 <div>
                     <button type="submit">Sign Up</button>
                 </div>

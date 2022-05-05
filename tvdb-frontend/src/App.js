@@ -2,6 +2,9 @@ import './App.css';
 import TVShowComponent from './components/TVShowComponent';
 import UserComponent from './components/UserComponent';
 import ActorComponent from './components/ActorComponent';
+import ActorPageComponent from './components/ActorPageComponent';
+import DirectorComponent from './components/DirectorComponent';
+import DirectorPageComponent from './components/DirectorPageComponent';
 import {BrowserRouter, Routes, Route, Link} from 'react-router-dom';
 import Home from './components/Home';
 import AddDetail from './components/AddDetail';
@@ -27,6 +30,36 @@ function App() {
           <h1>tv-show-database</h1>
         </div>
         <div>
+          <li>
+            <Link to="/">Home Page</Link>
+          </li>
+          <li>
+            <Link to="/tvshows">TV Show List</Link>
+          </li>
+          <li>
+            <Link to="/actors">Actor List</Link>
+          </li>
+          <li>
+            <Link to="/directors">Director List</Link>
+          </li>
+          <li>
+            <Link to="/users">User List</Link>
+          </li>
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
+          <li>
+            <Link to="/signup">Sign Up</Link>
+          </li>
+          <li>
+            <Link to="/adddetail">Add Detail</Link>
+          </li>
+          <li>
+            <Link to={`/profile/${user || ""}`}>My Profile</Link>
+          </li>
+          <li>
+            <SearchBar />
+          </li>
           <ul>
             <li style={{display: 'inline'}}>
               <Link to="/">
@@ -39,6 +72,20 @@ function App() {
               <Link to="/tvshows">
                 <button type="button">
                   TV Show list
+                </button>
+              </Link>
+            </li>
+            <li style={{ display: 'inline' }}>
+              <Link to="/actors">
+                <button type="button">
+                  Actor list
+                </button>
+              </Link>
+            </li>
+            <li style={{ display: 'inline' }}>
+              <Link to="/directors">
+                <button type="button">
+                  Director list
                 </button>
               </Link>
             </li>
@@ -77,6 +124,9 @@ function App() {
                 </button>
               </Link>
             </li>
+            <li style={{display: 'inline'}}>
+              <SearchBar />
+            </li>
           </ul>
         </div>
           <Routes>
@@ -86,6 +136,12 @@ function App() {
               <Route path=":showID" element={<TVShowPage/>}></Route>
             </Route>
             <Route path="/actors" element={<ActorComponent/>}>
+                          <Route path=":actorID" element={<ActorPageComponent />}>
+                          </Route>
+            </Route>
+            <Route path="/directors" element={<DirectorComponent/>}>
+                          <Route path=":directorID" element={<DirectorPageComponent />}>
+                          </Route>
             </Route>
             <Route path="/users" element={<UserComponent/>}>
             </Route>

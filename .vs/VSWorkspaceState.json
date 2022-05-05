@@ -1,0 +1,17 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\main",
+    "\\src\\main\\java",
+    "\\src\\main\\java\\com",
+    "\\src\\main\\java\\com\\tvshowdatabase",
+    "\\src\\main\\resources",
+    "\\tvdb-frontend",
+    "\\tvdb-frontend\\src",
+    "\\tvdb-frontend\\src\\components",
+    "\\tvdb-frontend\\src\\services"
+  ],
+  "SelectedNode": "\\tvdb-frontend\\src\\components\\ActorPageComponent.js",
+  "PreviewInSolutionExplorer": false
+}

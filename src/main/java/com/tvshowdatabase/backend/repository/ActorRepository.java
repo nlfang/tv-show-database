@@ -26,6 +26,16 @@ public interface ActorRepository extends JpaRepository<Actor, Integer> {
                     "LIMIT 3", nativeQuery = true)
     List<Map<String, Integer>> getTopActors(String username);
 
+    @Query(value = "SELECT a.* FROM actors a WHERE a.actorid = ?1", nativeQuery = true)
+    Actor getActorByID(@Param("actorID") int actorID);
+
+    @Query(value = "SELECT t.name, ad.character_name FROM actors a " +
+            "INNER JOIN acted ad ON a.actorid = ad.actorID " +
+            "INNER JOIN tv_shows t on t.showID = ad.showID " +
+            "WHERE a.actorid = ?1" +
+            "ORDER BY t.name", nativeQuery = true)
+    List<String> getShowsByActorID(@Param("actorID") int actorID);
+
     @Query(value = "SELECT a.actorid FROM actors a WHERE a.actor_name = ?1", nativeQuery = true)
     int getActorIDByName(String actorName);
 

@@ -21,6 +21,39 @@ public class DirectorController {
     @Autowired
     private DirectorRepository directorRepository;
 
+    @GetMapping("/directors")
+    public List<Director> getAllDirectors() {
+        System.out.println("Reached get all directors");
+        return directorRepository.findAll();
+    }
+
+    /**
+     * Rithwik Palivela
+     *
+     * Get a director by their id
+     *
+     * ISOLATION LEVEL EXPLANATION: READ_UNCOMMITTED
+     */
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
+    @GetMapping("directors/{directorID}")
+    public Director getDirectorByID(@PathVariable("directorID") int directorID) {
+        System.out.println("Reached get director by id");
+        return directorRepository.getDirectorByID(directorID);
+    }
+
+    /**
+     * Rithwik Palivela
+     *
+     * Get a director's shows by their id
+     *
+     * ISOLATION LEVEL EXPLANATION: READ_UNCOMMITTED
+     */
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
+    @GetMapping("directors/{directorID}/shows")
+    public List<String> getShowsByDirectorID(@PathVariable("directorID") int directorID) {
+        System.out.println("Reached get director's shows by id");
+        return directorRepository.getShowsByDirectorID(directorID);
+    }
 
     /**
      * Nicholas Fang

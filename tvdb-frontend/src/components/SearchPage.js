@@ -37,7 +37,7 @@ class SearchPage extends React.Component {
         return(
             <div>
                 <h2>TV Show Search Results: </h2>
-                <div>
+                <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
                     <table className="table table-bordered border-info">
                         <thead>
                             <tr>
@@ -65,7 +65,7 @@ class SearchPage extends React.Component {
                     </table>
                 </div>
                 <h2>Actor Search Results: </h2>
-                <div>
+                <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
                     <table className="table table-bordered border-info">
                         <thead>
                             <tr>
@@ -89,7 +89,7 @@ class SearchPage extends React.Component {
                     </table>
                 </div>
                 <h2>Director Search Results: </h2>
-                <div>
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <table className="table table-bordered border-info">
                         <thead>
                             <tr>

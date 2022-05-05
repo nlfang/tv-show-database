@@ -64,9 +64,9 @@ function App() {
               </Link>
             </li>
             <li style={{display: 'inline'}}>
-              <Link to="/addtvshow">
+              <Link to="/adddetail">
                 <button type="button">
-                  Add TV Show
+                  Add Detail
                 </button>
               </Link>
             </li>

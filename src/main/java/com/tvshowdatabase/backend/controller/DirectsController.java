@@ -1,5 +1,8 @@
 package com.tvshowdatabase.backend.controller;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +13,7 @@ import com.tvshowdatabase.backend.models.TVShow;
 import com.tvshowdatabase.backend.repository.DirectorRepository;
 import com.tvshowdatabase.backend.repository.DirectsRepository;
 import com.tvshowdatabase.backend.repository.TVShowRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +35,18 @@ public class DirectsController {
     @Autowired
     private TVShowRepository tvShowRepository;
 
+    @Value("${spring.datasource.url}")
+    private String springDatasourceUrl;
+
+    @Value("${spring.datasource.driver-class-name}")
+    private String springDatasourceDriverClassName;
+
+    @Value("${spring.datasource.username}")
+    private String springDatasourceUsername;
+
+    @Value("${spring.datasource.password}")
+    private String springDatasourcePassword;
+
     /**
      * Nicholas Fang
      *
@@ -43,12 +59,23 @@ public class DirectsController {
      */
     @Transactional(isolation = Isolation.SERIALIZABLE)
     @PostMapping("/adddirectorrole/{roleDirectorName}/{directsShowName}")
-    public ResponseEntity<Directs> addDirectorRole (@PathVariable("roleDirectorName") String dirName,
+    public ResponseEntity<String> addDirectorRole (@PathVariable("roleDirectorName") String dirName,
                                                     @PathVariable("directsShowName") String showName) {
         int directorID = directorRepository.getDirectorID(dirName);
         int showID = tvShowRepository.getTVShowIDByName(showName);
 
-        Directs directs = new Directs(directorID, showID);
-        return new ResponseEntity<Directs>(directsRepository.save(directs), HttpStatus.OK);
+        String addString = "INSERT INTO directs (directorID, showID) VALUES (?, ?)";
+        try ( Connection conn = DriverManager.getConnection(
+                springDatasourceUrl, springDatasourceUsername, springDatasourcePassword);
+              PreparedStatement preparedStatement = conn.prepareStatement(addString)) {
+
+            preparedStatement.setInt(1, directorID);
+            preparedStatement.setInt(2, showID);
+            boolean result = preparedStatement.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<String>("Exception occurred, failed to add TV Show", HttpStatus.UNAUTHORIZED);
+        }
+        return new ResponseEntity<String>("Success", HttpStatus.OK);
     }
 }

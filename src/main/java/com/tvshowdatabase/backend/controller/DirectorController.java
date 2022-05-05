@@ -26,6 +26,44 @@ public class DirectorController {
     @Autowired
     private TVShowRepository tvShowRepository;
 
+    @GetMapping("/directors")
+    public List<Director> getAllDirectors() {
+        System.out.println("Reached get all directors");
+        return directorRepository.findAll();
+    }
+
+    /**
+     * Rithwik Palivela
+     *
+     * Get a director's shows by their id
+     *
+     * ISOLATION LEVEL EXPLANATION: READ_UNCOMMITTED because there's no reason to bother with locks.
+     * We are only reading results here instead of performing any modifications. It is not at all
+     * necessary in this case to sacrifice speed to guarantee consistency and accuracy.
+     */
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
+    @GetMapping("directors/{directorID}")
+    public List<Director> getDirectorByID(@PathVariable("directorID") int directorID) {
+        System.out.println("Reached get director by id");
+        return directorRepository.getDirectorByID(directorID);
+    }
+
+    /**
+     * Rithwik Palivela
+     *
+     * Get a director's shows by their id
+     *
+     * ISOLATION LEVEL EXPLANATION: READ_UNCOMMITTED because there's no reason to bother with locks.
+     * We are only reading results here instead of performing any modifications. It is not at all
+     * necessary in this case to sacrifice speed to guarantee consistency and accuracy.
+     */
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
+    @GetMapping("directors/{directorID}/{directorIDAgain}")
+    public List<String> getShowsByDirectorID(@PathVariable("directorID") int directorID, @PathVariable("directorIDAgain") int directorIDAgain) {
+        System.out.println("Reached get director's shows by id");
+        return directorRepository.getShowsByDirectorID(directorID);
+    }
+
     /**
      * Nicholas Fang
      *
@@ -97,7 +135,7 @@ public class DirectorController {
 
         String dirDOB = directorRepository.getDirectorDOB(directorID);
 
-        Director director = new Director(directorID, dirName, dirDOB, showID);
+        Director director = new Director(directorID, dirName, dirDOB, showID, showName);
         directorRepository.save(director);
         return new ResponseEntity<String>("Success", HttpStatus.OK);
     }

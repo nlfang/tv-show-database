@@ -36,6 +36,38 @@ public class ActorController {
     }
 
     /**
+     * Rithwik Palivela
+     *
+     * Get an actor by their id
+     *
+     * ISOLATION LEVEL EXPLANATION: READ_UNCOMMITTED because there's no reason to bother with locks.
+     * We are only reading results here instead of performing any modifications. It is not at all
+     * necessary in this case to sacrifice speed to guarantee consistency and accuracy.
+     */
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
+    @GetMapping("/actors/{actorID}")
+    public List<Actor> getActorByID(@PathVariable("actorID") int actorID) {
+        System.out.println("Reached get actor by id");
+        return actorRepository.getActorByID(actorID);
+    }
+
+    /**
+     * Rithwik Palivela
+     *
+     * Get an actor's shows by their id
+     *
+     * ISOLATION LEVEL EXPLANATION: READ_UNCOMMITTED because there's no reason to bother with locks.
+     * We are only reading results here instead of performing any modifications. It is not at all
+     * necessary in this case to sacrifice speed to guarantee consistency and accuracy.
+     */
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
+    @GetMapping("actors/{actorID}/{actorIDAgain}")
+    public List<String> getShowsByActorID(@PathVariable("actorID") int actorID, @PathVariable("actorIDAgain") int actorIDAgain) {
+        System.out.println("Reached get actor's shows by id");
+        return actorRepository.getShowsByActorID(actorID);
+    }
+
+    /**
      * Nicholas Fang
      *
      * Adds an actor role to the database
@@ -55,7 +87,7 @@ public class ActorController {
 
         int showID = tvShowRepository.getTVShowIDByName(showName);
 
-        Actor actor = new Actor(actorID, roleActorName, actorDOB, showID, charName);
+        Actor actor = new Actor(actorID, roleActorName, actorDOB, showID, charName, showName);
         actorRepository.save(actor);
         return new ResponseEntity<String>("Success", HttpStatus.OK);
     }

@@ -35,25 +35,30 @@ public class Actor {
     @Column (name = "charName")
     private String charName;
 
+    @Column (name = "actsName")
+    private String actsName;
+
     /* connect to Actor-TVShow relationship */
     @OneToMany(mappedBy="actor")
     private Set<ActsIn> actsIns = new HashSet<>();
 
-    public Actor(int actorID, String actorName, String actorDOB, int actsID, String charName) {
+    public Actor(int actorID, String actorName, String actorDOB, int actsID, String charName, String actsName) {
         this.actorID = actorID;
         this.actorName = actorName;
         this.actorDOB = actorDOB;
         this.actsID = actsID;
         this.charName= charName;
+        this.actsName = actsName;
     }
 
     public Actor(){}
 
-    public Actor(String actorName, String actorDOB, int actsID, String charName) {
+    public Actor(String actorName, String actorDOB, int actsID, String charName, String actsName) {
         this.actorName = actorName;
         this.actorDOB = actorDOB;
         this.actsID = actsID;
         this.charName = charName;
+        this.actsName = actsName;
     }
 
     public int getActorID() {

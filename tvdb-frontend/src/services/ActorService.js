@@ -12,6 +12,14 @@ class ActorService {
         return axios.get(`${BASE_API_URL}/actors`);
     }
 
+    getActorByID(actorID) {
+        return axios.get(`${BASE_API_URL}/actors/${actorID}`);
+    }
+
+    getActorShows(actorID) {
+        return axios.get(`${BASE_API_URL}/actors/${actorID}/${actorID}`);
+    }
+
     getActorSearch(searchQuery) {
         return axios.get(`${BASE_API_URL}/actors/search/${searchQuery}`);
     }

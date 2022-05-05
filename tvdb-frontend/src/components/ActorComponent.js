@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import ActorService from '../services/ActorService';
 import {Navbar} from 'react-bootstrap'
+import { Outlet } from 'react-router-dom';
 
 class ActorComponent extends React.Component {
     constructor(props) {

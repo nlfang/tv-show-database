@@ -2,6 +2,11 @@ import './App.css';
 import TVShowComponent from './components/TVShowComponent';
 import UserComponent from './components/UserComponent';
 import ActorComponent from './components/ActorComponent';
+import ActorPageComponent from './components/ActorPageComponent';
+import ActorPageShowsComponent from './components/ActorPageShowsComponent';
+import DirectorComponent from './components/DirectorComponent';
+import DirectorPageComponent from './components/DirectorPageComponent';
+import DirectorPageShowsComponent from './components/DirectorPageShowsComponent';
 import {BrowserRouter, Routes, Route, Link} from 'react-router-dom';
 import Home from './components/Home';
 import AddDetail from './components/AddDetail';
@@ -34,7 +39,10 @@ function App() {
           </li>
           <li>
             <Link to="/actors">Actor List</Link>
-          </li>
+                      </li>
+                      <li>
+                          <Link to="/directors">Director List</Link>
+                          </li>
           <li>
             <Link to="/users">User List</Link>
           </li>
@@ -60,8 +68,16 @@ function App() {
             <Route path="/tvshows" element={<TVShowComponent/>}>
               <Route path=":showID" element={<TVShowPage/>}></Route>
             </Route>
-            <Route path="/actors" element={<ActorComponent/>}>
-            </Route>
+                      <Route path="/actors" element={<ActorComponent />}>
+                          <Route path=":actorID" element={<ActorPageComponent />}>
+                              <Route path=":actorID" element={<ActorPageShowsComponent />}></Route>
+                          </Route>
+             </Route>
+                      <Route path="/directors" element={<DirectorComponent />}>
+                          <Route path=":directorID" element={<DirectorPageComponent />}>
+                              <Route path=":directorID" element={<DirectorPageShowsComponent />}></Route>
+                          </Route>
+                          </Route>
             <Route path="/users" element={<UserComponent/>}>
             </Route>
             <Route path="/adddetail" element={<AddDetail/>}>

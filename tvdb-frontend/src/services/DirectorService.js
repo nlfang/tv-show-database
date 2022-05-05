@@ -8,6 +8,18 @@ class DirectorService {
         return axios.get(`${BASE_API_URL}/topDirectors/${username}`);
     }
 
+    getDirectors() {
+        return axios.get(`${BASE_API_URL}/directors`);
+    }
+
+    getDirectorByID(directorID) {
+        return axios.get(`${BASE_API_URL}/directors/${directorID}`);
+    }
+
+    getDirectorShows(directorID) {
+        return axios.get(`${BASE_API_URL}/directors/${directorID}/${directorID}`);
+    }
+
     getDirectorSearch(searchQuery) {
         return axios.get(`${BASE_API_URL}/directors/search/${searchQuery}`);
     }

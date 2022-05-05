@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.tvshowdatabase.backend.models.Actor;
+import com.tvshowdatabase.backend.models.Director;
 import com.tvshowdatabase.backend.models.TVShow;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -25,6 +26,16 @@ public interface ActorRepository extends JpaRepository<Actor, Integer> {
                     "ORDER BY count DESC " + 
                     "LIMIT 3", nativeQuery = true)
     List<Map<String, Integer>> getTopActors(String username);
+
+    @Query(value = "SELECT a.* FROM actors a " +
+            "WHERE a.actorid = ?1", nativeQuery = true)
+    List<Actor> getActorByID(@Param("actorID") int actorID);
+
+    @Query(value = "SELECT s.name FROM actors a " +
+                    "INNER JOIN tv_shows s ON a.actsID = s.showID" +
+                    "WHERE a.actorid = ?1" +
+                    "ORDER BY s.name", nativeQuery = true)
+    List<String> getShowsByActorID(@Param("actorID") int actorID);
 
     @Query(value = "SELECT a.actorid FROM actors a WHERE a.actor_name = ?1 AND a.actsID = 0 LIMIT 1", nativeQuery = true)
     int getActorIDByName(String actorName);

@@ -28,7 +28,6 @@ class ActorComponent extends React.Component {
                     <tr>
                     <th>Actor ID</th>
                     <th>Name</th>
-                    <th>Date of Birth</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,15 +35,15 @@ class ActorComponent extends React.Component {
                         this.state.actors.map(
                             actors =>
                                 <tr key = {actors.actorID}>
-                                        <td>{actors.actorID}</td>
+                                    <td><a href={'/actors/' + actors.actorID}>{actors.actorID}</a></td>
                                         <td>{actors.actorName}</td>
-                                        <td>{actors.actorDOB}</td>
                                 </tr>
                         )
                     }
                 </tbody>
             </table>
-            </div>
+                </div>
+                <Outlet />
             </div>
         )
     }

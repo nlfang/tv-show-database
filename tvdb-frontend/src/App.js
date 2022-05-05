@@ -136,10 +136,12 @@ function App() {
               <Route path=":showID" element={<TVShowPage/>}></Route>
             </Route>
             <Route path="/actors" element={<ActorComponent/>}>
-              <Route path=":actorID" element={<ActorPageComponent/>}></Route>
+                          <Route path=":actorID" element={<ActorPageComponent />}>
+                          </Route>
             </Route>
             <Route path="/directors" element={<DirectorComponent/>}>
-              <Route path=":directorID" element={<DirectorPageComponent/>}></Route>
+                          <Route path=":directorID" element={<DirectorPageComponent />}>
+                          </Route>
             </Route>
             <Route path="/users" element={<UserComponent/>}>
             </Route>

@@ -34,7 +34,7 @@ public interface ActorRepository extends JpaRepository<Actor, Integer> {
             "INNER JOIN tv_shows t on t.showID = ad.showID " +
             "WHERE a.actorid = ?1" +
             "ORDER BY t.name", nativeQuery = true)
-    List<Map<String, String>> getShowsByActorID(@Param("actorID") int actorID);
+    List<String> getShowsByActorID(@Param("actorID") int actorID);
 
     @Query(value = "SELECT a.actorid FROM actors a WHERE a.actor_name = ?1", nativeQuery = true)
     int getActorIDByName(String actorName);

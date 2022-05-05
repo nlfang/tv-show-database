@@ -2,6 +2,7 @@ import React from 'react'
 import ActorService from '../services/ActorService'
 import { useParams } from 'react-router-dom'
 import { Navbar } from 'react-bootstrap'
+import { Outlet } from 'react-router-dom';
 
 class ActorPageComponent extends React.Component {
     constructor(props) {
@@ -27,6 +28,7 @@ class ActorPageComponent extends React.Component {
                     <li>Actor Name: {this.state.actor.actorName}</li>
                     <li>Actor DOB: {this.state.actor.actorDOB}</li>
                 </ul>
+                <Outlet />
             </div>
         );
     }

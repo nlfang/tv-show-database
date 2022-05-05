@@ -2,6 +2,7 @@ import React from 'react'
 import DirectorService from '../services/DirectorService'
 import { useParams } from 'react-router-dom'
 import { Navbar } from 'react-bootstrap'
+import { Outlet } from 'react-router-dom';
 
 class DirectorPageComponent extends React.Component {
     constructor(props) {
@@ -14,11 +15,12 @@ class DirectorPageComponent extends React.Component {
     }
     componentDidMount() {
         DirectorService.getDirectorByID(this.state.directorID).then((Response) => {
-            this.setState({ director: Response.data })
+            this.setState({ director: Response.data });
         });
     }
     render() {
         console.log(this.state.director);
+        console.log(this.state.shows);
         return (
             <div>
                 <h2>{this.state.director.directorName}</h2>
@@ -27,6 +29,7 @@ class DirectorPageComponent extends React.Component {
                     <li>Director Name: {this.state.director.directorName}</li>
                     <li>Director DOB: {this.state.director.directorDOB}</li>
                 </ul>
+                <Outlet />
             </div>
         );
     }

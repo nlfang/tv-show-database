@@ -42,6 +42,20 @@ public class DirectorController {
     }
 
     /**
+     * Rithwik Palivela
+     *
+     * Get a director's shows by their id
+     *
+     * ISOLATION LEVEL EXPLANATION: READ_UNCOMMITTED
+     */
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
+    @GetMapping("directors/{directorID}/shows")
+    public List<String> getShowsByDirectorID(@PathVariable("directorID") int directorID) {
+        System.out.println("Reached get director's shows by id");
+        return directorRepository.getShowsByDirectorID(directorID);
+    }
+
+    /**
      * Nicholas Fang
      *
      * Add a director to the database
